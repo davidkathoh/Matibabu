@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="marital_status">
+        <item>Celibataire</item>
+        <item>Marie</item>
+        <item>Divorce</item>
+    </string-array>
+
+</resources>
