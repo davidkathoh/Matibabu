@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.example.david.matibabu.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by david on 2/12/18.
  */
@@ -18,8 +20,13 @@ import com.example.david.matibabu.R;
 public class PatientListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
+    ArrayList<String> users;
 
 
+
+    public static PatientListFragment newInstance(){
+        return new PatientListFragment();
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +36,17 @@ public class PatientListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.patient_recycle_view,container,false);
-        mRecyclerView = v.findViewById(R.id.recycler_view);
-        mAdapter = new PatientAdapter();
+        mRecyclerView = v.findViewById(R.id.pat_recycle_view);
+        users = new ArrayList<>();
+        for (int i =0;i< 10;i++){
+            users.add("item "+i);
+        }
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new PatientAdapter(users);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
          return v;
     }
 }

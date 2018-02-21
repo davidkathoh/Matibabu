@@ -1,5 +1,6 @@
 package com.example.david.matibabu.addpatient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.david.matibabu.R;
+import com.example.david.matibabu.listpatient.PatientListActivity;
 import com.example.david.matibabu.view.fragment.CpnFragment;
 
 public class PatientActivity extends AppCompatActivity
@@ -22,6 +24,7 @@ public class PatientActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.addpatient_act);
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -82,9 +85,10 @@ public void displaySelectedScreen(int itemId){
             break;
         case R.id.nav_add_patient:
             //nothing todo
+            fragment = new PatientInfoFragment();
             break;
         case R.id.nav_cpn:
-            fragment = new CpnFragment();
+            startActivity(new Intent(this, PatientListActivity.class));
     }
     if (fragment != null){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

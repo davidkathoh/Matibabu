@@ -30,13 +30,11 @@ public class PatientPresenter {
 
 
 
-    public void add(){
-        Log.e("ANT", String.valueOf(mChirurgi.isCesarienne()));
-    }
     private static PersonalInfo addPatient(AppDatabase db,PersonalInfo personalInfo){
         db.patientDao().insertPatient(personalInfo);
         return personalInfo;
     }
+
 //    private static void createPatient(AppDatabase db) {
 //
 //        addPatient(db, patient);

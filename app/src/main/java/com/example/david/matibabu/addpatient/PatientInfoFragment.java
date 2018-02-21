@@ -157,11 +157,11 @@ PatientPresenter mPatiente = new PatientPresenter() ;
         if (id == R.id.menu_next){
 
     mPatiente.createPatiente(edt_pat_name.getText().toString(),
-            Integer.valueOf(edt_pat_number.getText().toString()),
+            3,
           mDate,marital_status.getText().toString(),
             edt_coj_name.getText().toString(),
-            Integer.valueOf(edt_coj_number.getText().toString()),
-            edt_urg_name.getText().toString(),Integer.valueOf(edt_urg_phone.getText().toString()),
+           8,
+            edt_urg_name.getText().toString(),5,
            edt_pat_address.getText().toString(),getActivity().getApplicationContext());
 
 //            getActivity().getSupportFragmentManager().beginTransaction()
