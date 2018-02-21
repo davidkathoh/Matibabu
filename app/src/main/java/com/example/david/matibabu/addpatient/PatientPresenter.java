@@ -1,20 +1,19 @@
 package com.example.david.matibabu.addpatient;
 
-import android.app.Fragment;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 
-import com.example.david.matibabu.addpatient.dialogFragment.DfGyneco;
 import com.example.david.matibabu.model.localDB.AppDatabase;
 import com.example.david.matibabu.model.patient.PersonalInfo;
 import com.example.david.matibabu.model.patient.antecedents.GynecoChirurgi;
+import com.example.david.matibabu.utils.ActivityUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.Callable;
 
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -27,11 +26,14 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PatientPresenter {
     GynecoChirurgi mChirurgi;
+    private String EXTRAT_PATIENT_ID = "PATIENT_UID";
 
+List<PersonalInfo> persone;
 
-
-    private static PersonalInfo addPatient(AppDatabase db,PersonalInfo personalInfo){
+    private PersonalInfo addPatient(AppDatabase db,PersonalInfo personalInfo){
         db.patientDao().insertPatient(personalInfo);
+        persone = new ArrayList<>();
+        persone = db.patientDao().getAll();
         return personalInfo;
     }
 
@@ -41,9 +43,9 @@ public class PatientPresenter {
 //    }
 
 
-    public void createPatiente(String name, int telephone, Date dob, String etatCivil,
-                               String cojName, int cojPhone, String urgName,
-                               int urgPhone,String address, Context context) {
+    public void createPatiente(String name, String telephone, Date dob, String etatCivil,
+                               String cojName, String cojPhone, String urgName,
+                               String urgPhone, String address, Context context) {
         //Context context  = ;
         final AppDatabase db = AppDatabase.getAppDatabase(context);
                 //AppDatabase.getAppDatabase();
@@ -63,7 +65,8 @@ public class PatientPresenter {
                 addPatient(db,patient);
                 return patient;
             }
-        });
+        }
+        );
         patien.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<PersonalInfo>() {
@@ -74,11 +77,21 @@ public class PatientPresenter {
 
                     @Override
                     public void onSuccess(PersonalInfo personalInfo) {
-                        Log.e("ID",String.valueOf(personalInfo.getId()));
+
+                            Bundle bundle = new Bundle();
+
+                            // getting the added patient id and send it to antecents fragment
+                            int patientId = persone.get(persone.size()-1).getId();
+                            bundle.putInt(EXTRAT_PATIENT_ID,patientId);
+                            new PatientInfoFragment().openAntecendent(bundle);
+
+
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
+
                       Log.e("ERROR",e.getMessage());
 
                     }
@@ -86,4 +99,6 @@ public class PatientPresenter {
 
 
     }
+
+
 }

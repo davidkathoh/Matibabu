@@ -23,13 +23,14 @@ import android.widget.EditText;
 import com.example.david.matibabu.R;
 import com.example.david.matibabu.model.localDB.AppDatabase;
 import com.example.david.matibabu.model.patient.PersonalInfo;
+import com.example.david.matibabu.utils.ActivityUtils;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 
-public class PatientInfoFragment extends Fragment {
+public class PatientInfoFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -157,21 +158,35 @@ PatientPresenter mPatiente = new PatientPresenter() ;
         if (id == R.id.menu_next){
 
     mPatiente.createPatiente(edt_pat_name.getText().toString(),
-            3,
+            edt_pat_number.getText().toString(),
           mDate,marital_status.getText().toString(),
-            edt_coj_name.getText().toString(),
-           8,
-            edt_urg_name.getText().toString(),5,
+            edt_coj_name.getText().toString(),edt_coj_number.getText().toString(),
+            edt_urg_name.getText().toString(),edt_urg_phone.getText().toString(),
            edt_pat_address.getText().toString(),getActivity().getApplicationContext());
 
-//            getActivity().getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.content_main,antecedant,"Fragment")
-//                    .commit();
+
         }
         return super.onOptionsItemSelected(item);
     }
 
 
+
+
+
+    public void openAntecendent(Bundle bundle) {
+        PatientAntecedantFragment antecedant = new PatientAntecedantFragment();
+        antecedant.setArguments(bundle);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_main,antecedant,"Fragment")
+                .addToBackStack(null)
+                .commit();
+//        PatientAntecedantFragment antecedantFragment = new PatientAntecedantFragment();
+//        antecedantFragment.setArguments(bundle);
+//        ActivityUtils.addFragmentToActivity(getFragmentManager(),antecedantFragment,
+//                R.id.content_main);
+
+
+    }
 }
 
 

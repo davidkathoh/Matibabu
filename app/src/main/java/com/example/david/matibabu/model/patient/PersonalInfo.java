@@ -19,7 +19,7 @@ public class PersonalInfo {
    @ColumnInfo(name = "pat_name")
     private String patientName;
    @ColumnInfo(name = "pat_phone")
-    private int patientPhone;
+    private String patientPhone;
    @ColumnInfo(name = "address")
     private String address;
    @ColumnInfo(name = "martial_status")
@@ -34,11 +34,11 @@ public class PersonalInfo {
    @ColumnInfo(name = "coj_occupation")
     private String partnerOccupation;
     @ColumnInfo(name = "coj_number")
-    private int partnerNumber;
+    private String partnerNumber;
    @ColumnInfo(name = "res_name")
     private String rescueName;
    @ColumnInfo(name = "res_phone")
-    private int rescuePhone;
+    private String rescuePhone;
     @TypeConverters({TimestampConverter.class})
    @ColumnInfo(name = "Registration_date")
    private Date registrationDate;
@@ -60,14 +60,7 @@ public class PersonalInfo {
         this.patientName = patientName;
     }
 
-    public int getPatientPhone() {
-        return patientPhone;
-    }
-
-    public void setPatientPhone(int patientPhone) {
-        this.patientPhone = patientPhone;
-    }
-
+    public String getPatientPhone() {return patientPhone;}
     public String getAddress() {
         return address;
     }
@@ -117,14 +110,6 @@ public class PersonalInfo {
         this.rescueName = rescueName;
     }
 
-    public int getRescuePhone() {
-        return rescuePhone;
-    }
-
-    public void setRescuePhone(int rescuePhone) {
-        this.rescuePhone = rescuePhone;
-    }
-
     public String getEtatCivil() {
         return etatCivil;
     }
@@ -133,13 +118,6 @@ public class PersonalInfo {
         this.etatCivil = etatCivil;
     }
 
-    public int getPartnerNumber() {
-        return partnerNumber;
-    }
-
-    public void setPartnerNumber(int partnerNumber) {
-        this.partnerNumber = partnerNumber;
-    }
 
     public Date getRegistrationDate() {
         return registrationDate;
@@ -149,4 +127,23 @@ public class PersonalInfo {
         this.registrationDate = registrationDate;
     }
 
+    public void setPatientPhone(String patientPhone) {
+        this.patientPhone = patientPhone;
+    }
+
+    public void setPartnerNumber(String partnerNumber) {
+        this.partnerNumber = partnerNumber;
+    }
+
+    public void setRescuePhone(String rescuePhone) {
+        this.rescuePhone = rescuePhone;
+    }
+
+    public String getPartnerNumber() {
+        return partnerNumber;
+    }
+
+    public String getRescuePhone() {
+        return rescuePhone;
+    }
 }

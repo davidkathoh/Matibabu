@@ -111,7 +111,7 @@ public class PatientAntecedantFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.menu.save){
-            mPresenter.add();
+           // mPresenter.add();
         }
         return super.onOptionsItemSelected(item);
     }
