@@ -154,6 +154,7 @@ PatientPresenter mPatiente = new PatientPresenter() ;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         PatientAntecedantFragment antecedant = new PatientAntecedantFragment();
+        Bundle bundle = new Bundle();
         int id = item.getItemId();
         if (id == R.id.menu_next){
 
@@ -163,7 +164,13 @@ PatientPresenter mPatiente = new PatientPresenter() ;
             edt_coj_name.getText().toString(),edt_coj_number.getText().toString(),
             edt_urg_name.getText().toString(),edt_urg_phone.getText().toString(),
            edt_pat_address.getText().toString(),getActivity().getApplicationContext());
+        bundle.putInt("PATIENTID",mPatiente.getPatientId());
+        antecedant.setArguments(bundle);
 
+    getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_main,antecedant,"Fragment")
+                    .addToBackStack(null)
+                    .commit();
 
         }
         return super.onOptionsItemSelected(item);

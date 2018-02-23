@@ -20,6 +20,7 @@ import com.example.david.matibabu.R;
 
 public class DfObstericaux extends DialogFragment {
     public static final String EXTRAT_OBS_GESTILE="mGestile";
+    public static final String EXTRAT_OBS_PARITE="mParite";
     public static final String EXTRAT_OBS_ENFA="mEnfant";
     public static final String EXTRAT_OBS_AVORT="mAvortement";
     public static final String EXTRAT_OBS_DYSTO="mDystocie";
@@ -29,7 +30,7 @@ public class DfObstericaux extends DialogFragment {
     public static final String EXTRAT_OBS_MORT="mMort";
     public static final String EXTRAT_OBS_COMPLICATION="mComplication";
 
-
+    private CheckBox mParite;
     private CheckBox mGestile;
     private CheckBox mEnfant;
     private CheckBox mAvortement;
@@ -49,6 +50,7 @@ public class DfObstericaux extends DialogFragment {
         mAvortement = v.findViewById(R.id.chb_avortement);
         mDystocie = v.findViewById(R.id.chb_dystocie);
         mEutocie = v.findViewById(R.id.chb_eutocie);
+        mParite = v.findViewById(R.id.chb_parite);
         mPremature = v.findViewById(R.id.chb_premature);
         mPostPremature = v.findViewById(R.id.chb_postmature);
         mMort = v.findViewById(R.id.chb_mort);

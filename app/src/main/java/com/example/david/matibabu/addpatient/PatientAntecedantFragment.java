@@ -20,6 +20,7 @@ import com.example.david.matibabu.R;
 import com.example.david.matibabu.addpatient.dialogFragment.DfGyneco;
 import com.example.david.matibabu.addpatient.dialogFragment.DfMedical;
 import com.example.david.matibabu.addpatient.dialogFragment.DfObstericaux;
+import com.example.david.matibabu.model.patient.antecedents.Obstetricaux;
 
 /**
  * Created by david on 1/12/18.
@@ -33,19 +34,21 @@ public class PatientAntecedantFragment extends Fragment {
     final private String DF_MEDICAUX = "DF_MEDICAL";
     final private String DF_GYNECO = "DF_GYNECO";
     final private String DF_OBSTERICO = "DF_OBSTERICO";
-    PatientPresenter mPresenter;
 
     private TextView medical;
     private TextView obstericaux;
     private TextView gyneco;
-
+    PatientPresenter mPresenter ;
+    private int PatientId;
 
     public PatientAntecedantFragment()  {
+
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -88,19 +91,49 @@ public class PatientAntecedantFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mPresenter = new PatientPresenter();
         if (resultCode!= Activity.RESULT_OK){
             return;
         }
         if (requestCode == REQUEST_GYNECO){
-            boolean v = (Boolean) data.getSerializableExtra(DfGyneco.EXTRAT_GYNECO_FIBRO);
-            Log.e("GYN",String.valueOf(v));
+           mPresenter.insertGyn(PatientId,
+                   isAntChecked(data,DfGyneco.EXTRAT_GYNECO_CESA),
+                    isAntChecked(data,DfGyneco.EXTRAT_GYNECO_CERC),
+                   isAntChecked(data,DfGyneco.EXTRAT_GYNECO_FIBRO),
+                   isAntChecked(data,DfGyneco.EXTRAT_GYNECO_FRA),
+                   isAntChecked(data,DfGyneco.EXTRAT_GYNECO_GEU),
+                   isAntChecked(data,DfGyneco.EXTRAT_GYNECO_Fist),
+                   isAntChecked(data,DfGyneco.EXTRAT_GYNECO_CICA),
+                   isAntChecked(data,DfGyneco.EXTRAT_GYNECO_STER));
+            //Log.e("GYN",String.valueOf(v));
 
 
         }
         if (requestCode ==REQUEST_MEDICAUX){
-
+            mPresenter.inserMedi(PatientId,
+                    isAntChecked(data,DfMedical.EXTRAT_MEDI_TBC),
+                    isAntChecked(data,DfMedical.EXTRAT_MEDI_HTA),
+                    isAntChecked(data,DfMedical.EXTRAT_MEDI_SCA),
+                    isAntChecked(data,DfMedical.EXTRAT_MEDI_DBT),
+                    isAntChecked(data,DfMedical.EXTRAT_MEDI_CAR),
+                    isAntChecked(data,DfMedical.EXTRAT_MEDI_MGF),
+                    isAntChecked(data,DfMedical.EXTRAT_MEDI_SYPHILIS),
+                    isAntChecked(data,DfMedical.EXTRAT_MEDI_SIDA),
+                    isAntChecked(data,DfMedical.EXTRAT_MEDI_VVS),
+                    isAntChecked(data,DfMedical.EXTRAT_MEDI_PEP));
         }
         if (requestCode == REQUEST_OBSTERICO){
+            mPresenter.insertObs(PatientId,
+                    isAntChecked(data,DfObstericaux.EXTRAT_OBS_PARITE),
+                    isAntChecked(data,DfObstericaux.EXTRAT_OBS_GESTILE),
+                    isAntChecked(data,DfObstericaux.EXTRAT_OBS_ENFA),
+                    isAntChecked(data,DfObstericaux.EXTRAT_OBS_AVORT),
+                    isAntChecked(data,DfObstericaux.EXTRAT_OBS_DYSTO),
+                    isAntChecked(data,DfObstericaux.EXTRAT_OBS_EUTO),
+                    isAntChecked(data,DfObstericaux.EXTRAT_OBS_PREMATURE),
+                    isAntChecked(data,DfObstericaux.EXTRAT_OBS_POSTMATURE),
+                    isAntChecked(data,DfObstericaux.EXTRAT_OBS_MORT),
+                    isAntChecked(data,DfObstericaux.EXTRAT_OBS_COMPLICATION));
 
         }
 
@@ -126,5 +159,7 @@ public class PatientAntecedantFragment extends Fragment {
         fragment.show(fragmentManager,tag);
 
     }
-
+    public boolean isAntChecked(Intent data,String EXTRAT_KEY){
+       return   (Boolean) data.getSerializableExtra(EXTRAT_KEY) ;
+    }
 }

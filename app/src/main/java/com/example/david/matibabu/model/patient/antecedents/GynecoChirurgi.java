@@ -1,10 +1,22 @@
 package com.example.david.matibabu.model.patient.antecedents;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
+
+import com.example.david.matibabu.model.patient.PersonalInfo;
+
 /**
  * Created by david on 11/22/17.
  */
-
+@Entity(tableName = "Gyneco",foreignKeys = @ForeignKey(
+        entity = PersonalInfo.class,parentColumns ="id"
+        ,childColumns = "patientId"))
 public class GynecoChirurgi {
+    @PrimaryKey(autoGenerate = true)
+    private int antGynId;
+    @ColumnInfo(name = "patientId")
     private int patient_id;
     private boolean cesarienne;
     private boolean cerclage;
@@ -14,6 +26,19 @@ public class GynecoChirurgi {
     private boolean fistule;
     private boolean uterusCicatriciel;
     private boolean steriliteTraitement;
+
+
+    public GynecoChirurgi(int patient_id, boolean cesarienne, boolean cerclage, boolean fibromeUterin, boolean fractureBassin, boolean geu, boolean fistule, boolean uterusCicatriciel, boolean steriliteTraitement) {
+        this.patient_id = patient_id;
+        this.cesarienne = cesarienne;
+        this.cerclage = cerclage;
+        this.fibromeUterin = fibromeUterin;
+        this.fractureBassin = fractureBassin;
+        this.geu = geu;
+        this.fistule = fistule;
+        this.uterusCicatriciel = uterusCicatriciel;
+        this.steriliteTraitement = steriliteTraitement;
+    }
 
     public boolean isCesarienne() {
         return cesarienne;
@@ -77,6 +102,14 @@ public class GynecoChirurgi {
 
     public void setSteriliteTraitement(boolean steriliteTraitement) {
         this.steriliteTraitement = steriliteTraitement;
+    }
+
+    public int getAntGynId() {
+        return antGynId;
+    }
+
+    public void setAntGynId(int antGynId) {
+        this.antGynId = antGynId;
     }
 
     public int getPatient_id() {

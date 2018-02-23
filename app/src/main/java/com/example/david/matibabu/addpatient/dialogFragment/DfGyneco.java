@@ -25,6 +25,7 @@ public class DfGyneco extends DialogFragment {
     public static final String EXTRAT_GYNECO_FIBRO="mFibrone";
     public static final String EXTRAT_GYNECO_FRA="mFracture";
     public static final String EXTRAT_GYNECO_GEU="mGeu";
+    public static final String EXTRAT_GYNECO_Fist="mFist";
     public static final String EXTRAT_GYNECO_CICA="mCicatrice";
     public static final String EXTRAT_GYNECO_STER="mSterilite";
 
@@ -33,6 +34,7 @@ public class DfGyneco extends DialogFragment {
     private CheckBox mFibrone;
     private CheckBox mFracture;
     private CheckBox mGeu;
+    private CheckBox mFistude;
     private CheckBox mCicatrice;
     private CheckBox mSterilite;
 
@@ -47,6 +49,7 @@ public class DfGyneco extends DialogFragment {
         mFibrone = v.findViewById(R.id.chb_fibrone);
         mFracture = v.findViewById(R.id.chb_fracture_bassin);
         mGeu = v.findViewById(R.id.chb_geu);
+        mFistude = v.findViewById(R.id.chb_fistude);
         mCicatrice = v.findViewById(R.id.chb_cecatrice);
         mSterilite = v.findViewById(R.id.chb_sterilite);
 
@@ -76,6 +79,7 @@ public class DfGyneco extends DialogFragment {
         i.putExtra(EXTRAT_GYNECO_FRA,mFracture.isChecked());
         i.putExtra(EXTRAT_GYNECO_CICA,mCicatrice.isChecked());
         i.putExtra(EXTRAT_GYNECO_GEU,mGeu.isChecked());
+        i.putExtra(EXTRAT_GYNECO_Fist,mFistude.isChecked());
         i.putExtra(EXTRAT_GYNECO_STER,mSterilite.isChecked());
 
         getTargetFragment()

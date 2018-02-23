@@ -1,12 +1,25 @@
 package com.example.david.matibabu.model.patient.antecedents;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+
+import com.example.david.matibabu.model.patient.PersonalInfo;
+import com.example.david.matibabu.utils.TimestampConverter;
+
 import java.util.Date;
 
 /**
  * Created by david on 11/22/17.
  */
-
+@Entity(foreignKeys = @ForeignKey(
+        entity = PersonalInfo.class,parentColumns ="id"
+        ,childColumns = "patientId"))
 public class Obstetricaux {
+    @PrimaryKey(autoGenerate = true)
+    private int antObstId;
+    private int patientId;
     private boolean parite;
     private boolean gestite;
     private boolean enfantEnVie;
@@ -18,8 +31,23 @@ public class Obstetricaux {
     private boolean post_mature;
     private boolean mort_ne;
     private boolean mort_avant7jours;
+    @TypeConverters({TimestampConverter.class})
     private Date lastBirthdate;
-    private String complicationPostPartum;
+    private boolean complicationPostPartum;
+
+    public Obstetricaux(int patientId, boolean parite, boolean gestite, boolean enfantEnVie, boolean avortement, boolean dystocie, boolean eutocie, boolean premature, boolean post_mature, boolean mort_ne, boolean complicationPostPartum) {
+        this.patientId = patientId;
+        this.parite = parite;
+        this.gestite = gestite;
+        this.enfantEnVie = enfantEnVie;
+        this.avortement = avortement;
+        this.dystocie = dystocie;
+        this.eutocie = eutocie;
+        this.premature = premature;
+        this.post_mature = post_mature;
+        this.mort_ne = mort_ne;
+        this.complicationPostPartum = complicationPostPartum;
+    }
 
     public boolean isParite() {
         return parite;
@@ -117,11 +145,27 @@ public class Obstetricaux {
         this.lastBirthdate = lastBirthdate;
     }
 
-    public String getComplicationPostPartum() {
+    public boolean getComplicationPostPartum() {
         return complicationPostPartum;
     }
 
-    public void setComplicationPostPartum(String complicationPostPartum) {
+    public void setComplicationPostPartum(boolean complicationPostPartum) {
         this.complicationPostPartum = complicationPostPartum;
+    }
+
+    public int getAntObstId() {
+        return antObstId;
+    }
+
+    public void setAntObstId(int antObstId) {
+        this.antObstId = antObstId;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 }

@@ -1,11 +1,21 @@
 package com.example.david.matibabu.model.patient.antecedents;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
+
+import com.example.david.matibabu.model.patient.PersonalInfo;
+
 /**
  * Created by david on 11/22/17.
  */
-
+@Entity(foreignKeys = @ForeignKey(
+        entity = PersonalInfo.class,parentColumns ="id"
+        ,childColumns = "patientId"))
 public class Medicaux {
-    private int patient_id;
+    @PrimaryKey(autoGenerate = true)
+    private int antMediId;
+    private int patientId;
     private boolean tbc;
     private boolean hta;
     private boolean sca_ss;
@@ -17,6 +27,21 @@ public class Medicaux {
     private boolean vih_sida;
     private boolean vvs;
     private boolean pep;
+
+    public Medicaux(int patientId, boolean tbc, boolean hta, boolean sca_ss, boolean dbt, boolean car, boolean mgf, boolean syphylis, boolean vih_sida, boolean vvs, boolean pep) {
+        this.patientId = patientId;
+        this.tbc = tbc;
+        this.hta = hta;
+        this.sca_ss = sca_ss;
+        this.dbt = dbt;
+        this.car = car;
+        this.mgf = mgf;
+        this.raa = raa;
+        this.syphylis = syphylis;
+        this.vih_sida = vih_sida;
+        this.vvs = vvs;
+        this.pep = pep;
+    }
 
     public boolean isTbc() {
         return tbc;
@@ -106,11 +131,19 @@ public class Medicaux {
         this.pep = pep;
     }
 
-    public int getPatient_id() {
-        return patient_id;
+    public int getAntMediId() {
+        return antMediId;
     }
 
-    public void setPatient_id(int patient_id) {
-        this.patient_id = patient_id;
+    public void setAntMediId(int antMediId) {
+        this.antMediId = antMediId;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 }

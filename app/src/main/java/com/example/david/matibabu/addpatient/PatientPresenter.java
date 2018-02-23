@@ -7,6 +7,8 @@ import android.util.Log;
 import com.example.david.matibabu.model.localDB.AppDatabase;
 import com.example.david.matibabu.model.patient.PersonalInfo;
 import com.example.david.matibabu.model.patient.antecedents.GynecoChirurgi;
+import com.example.david.matibabu.model.patient.antecedents.Medicaux;
+import com.example.david.matibabu.model.patient.antecedents.Obstetricaux;
 import com.example.david.matibabu.utils.ActivityUtils;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 public class PatientPresenter {
     GynecoChirurgi mChirurgi;
     private String EXTRAT_PATIENT_ID = "PATIENT_UID";
+    private int patientId;
 
 List<PersonalInfo> persone;
 
@@ -77,16 +80,10 @@ List<PersonalInfo> persone;
 
                     @Override
                     public void onSuccess(PersonalInfo personalInfo) {
-
-                            Bundle bundle = new Bundle();
-
                             // getting the added patient id and send it to antecents fragment
                             int patientId = persone.get(persone.size()-1).getId();
-                            bundle.putInt(EXTRAT_PATIENT_ID,patientId);
-                            new PatientInfoFragment().openAntecendent(bundle);
-
-
-
+                            setPatientId(patientId);
+                            Log.e("Boolean",String.valueOf(patientId));
                     }
 
                     @Override
@@ -99,6 +96,49 @@ List<PersonalInfo> persone;
 
 
     }
+    public GynecoChirurgi insertGyn(
+             int patient_id,
+             boolean cesarienne,
+             boolean cerclage,
+             boolean fibromeUterin,
+             boolean fractureBassin,
+             boolean geu,
+             boolean fistule,
+             boolean uterusCicatriciel,
+             boolean steriliteTraitement){
+        GynecoChirurgi gynecoChirurgi
+                = new GynecoChirurgi(getPatientId(),cesarienne,cerclage,fibromeUterin
+                        ,fractureBassin,geu,fistule,uterusCicatriciel,steriliteTraitement);
+        Log.e("BOOLEAN",String.valueOf(gynecoChirurgi.getPatient_id()));
+        return gynecoChirurgi;
+    }
+    public Medicaux inserMedi(
+            int patientId, boolean tbc, boolean hta,
+            boolean sca_ss, boolean dbt, boolean car,
+            boolean mgf, boolean syphylis,
+            boolean vih_sida, boolean vvs, boolean pep){
+                 Medicaux med =
+                         new Medicaux( patientId, tbc,
+                     hta,  sca_ss,dbt, car, mgf, syphylis,vih_sida,  vvs,  pep);
+                 return med;
+    }
+    public Obstetricaux insertObs(int patientId, boolean parite, boolean gestite,
+                                  boolean enfantEnVie, boolean avortement, boolean dystocie, boolean eutocie, boolean premature, boolean post_mature,
+                                  boolean mort_ne, boolean complicationPostPartum){
+                Obstetricaux obstetricaux
+                        = new Obstetricaux( patientId,  parite,
+        gestite, enfantEnVie, avortement,
+         dystocie, eutocie, premature,
+         post_mature, mort_ne,  complicationPostPartum);
+                return obstetricaux;
 
+    }
 
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
+    }
 }
