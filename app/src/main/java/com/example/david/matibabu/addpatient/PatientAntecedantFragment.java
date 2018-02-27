@@ -1,9 +1,11 @@
 package com.example.david.matibabu.addpatient;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -41,13 +43,17 @@ public class PatientAntecedantFragment extends Fragment {
     PatientPresenter mPresenter ;
     private int PatientId;
 
-    public PatientAntecedantFragment()  {
-
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
     }
 
@@ -55,6 +61,8 @@ public class PatientAntecedantFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_patient_info_1,container,false);
+        mPresenter = new PatientPresenter();
+        PatientId = mPresenter.getPatientId();
         setHasOptionsMenu(true);
        gyneco  = v.findViewById(R.id.txt_gyneco);
         obstericaux = v.findViewById(R.id.txt_obsterical);
@@ -144,7 +152,9 @@ public class PatientAntecedantFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.menu.save){
-           // mPresenter.add();
+          //  mPresenter.add(getContext());
+
+
         }
         return super.onOptionsItemSelected(item);
     }

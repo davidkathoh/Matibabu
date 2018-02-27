@@ -19,6 +19,7 @@
     <string name="menu_cpn">Cpn</string>
     <string name="menu_statistic">Statistique</string>
     <string name="title_activity_main">Accueil</string>
+    <string name="action_search">Recherche</string>
 
     <!--Info de la patiente -->
     <string name="nom_patiente"> Nom complet</string>

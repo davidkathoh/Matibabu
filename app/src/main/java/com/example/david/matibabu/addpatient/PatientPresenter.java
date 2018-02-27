@@ -28,15 +28,17 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PatientPresenter {
     GynecoChirurgi mChirurgi;
+    Medicaux mMedicaux;
+    Obstetricaux mObstetricaux;
     private String EXTRAT_PATIENT_ID = "PATIENT_UID";
     private int patientId;
 
-List<PersonalInfo> persone;
+
+    List<PersonalInfo> persone;
 
     private PersonalInfo addPatient(AppDatabase db,PersonalInfo personalInfo){
         db.patientDao().insertPatient(personalInfo);
         persone = new ArrayList<>();
-        persone = db.patientDao().getAll();
         return personalInfo;
     }
 
@@ -45,6 +47,18 @@ List<PersonalInfo> persone;
 //        addPatient(db, patient);
 //    }
 
+    public void addAntMedi(Medicaux medicaux,Context context){
+        AppDatabase db = AppDatabase.getAppDatabase(context);
+        db.patientDao().insertMedico(medicaux);
+    }
+    public void addAntGyn(GynecoChirurgi chirurgi,Context context){
+        AppDatabase db = AppDatabase.getAppDatabase(context);
+        db.patientDao().insertGyneco(chirurgi);
+    }
+    public void addAntObs(Obstetricaux obstetricaux,Context context){
+        AppDatabase db = AppDatabase.getAppDatabase(context);
+        db.patientDao().insertObsterico(obstetricaux);
+    }
 
     public void createPatiente(String name, String telephone, Date dob, String etatCivil,
                                String cojName, String cojPhone, String urgName,
@@ -110,6 +124,7 @@ List<PersonalInfo> persone;
                 = new GynecoChirurgi(getPatientId(),cesarienne,cerclage,fibromeUterin
                         ,fractureBassin,geu,fistule,uterusCicatriciel,steriliteTraitement);
         Log.e("BOOLEAN",String.valueOf(gynecoChirurgi.getPatient_id()));
+       mChirurgi = gynecoChirurgi;
         return gynecoChirurgi;
     }
     public Medicaux inserMedi(
@@ -120,6 +135,7 @@ List<PersonalInfo> persone;
                  Medicaux med =
                          new Medicaux( patientId, tbc,
                      hta,  sca_ss,dbt, car, mgf, syphylis,vih_sida,  vvs,  pep);
+                 mMedicaux = med;
                  return med;
     }
     public Obstetricaux insertObs(int patientId, boolean parite, boolean gestite,
@@ -130,9 +146,16 @@ List<PersonalInfo> persone;
         gestite, enfantEnVie, avortement,
          dystocie, eutocie, premature,
          post_mature, mort_ne,  complicationPostPartum);
+                mObstetricaux = obstetricaux;
                 return obstetricaux;
 
     }
+    public void add(Context context){
+        addAntGyn(mChirurgi,context);
+        addAntMedi(mMedicaux,context);
+        addAntObs(mObstetricaux,context);
+    }
+
 
     public int getPatientId() {
         return patientId;

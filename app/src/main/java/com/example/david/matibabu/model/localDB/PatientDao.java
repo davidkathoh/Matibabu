@@ -11,6 +11,8 @@ import com.example.david.matibabu.model.patient.antecedents.Obstetricaux;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+
 /**
  * Created by david on 1/30/18.
  */
@@ -19,7 +21,7 @@ public interface PatientDao {
     @Insert
     void insertPatient(PersonalInfo ... personalInfos);
     @Query("SELECT * FROM Patient")
-    List<PersonalInfo> getAll();
+    Flowable<List<PersonalInfo>> getAll();
     @Insert
     void insertGyneco(GynecoChirurgi ... chirurgis);
     @Insert
