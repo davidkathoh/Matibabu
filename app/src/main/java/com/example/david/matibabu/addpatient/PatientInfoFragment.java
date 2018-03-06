@@ -25,6 +25,7 @@ import com.example.david.matibabu.model.localDB.AppDatabase;
 import com.example.david.matibabu.model.patient.PersonalInfo;
 import com.example.david.matibabu.utils.ActivityUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -138,8 +139,9 @@ PatientPresenter mPatiente = new PatientPresenter() ;
         }
         if (requestCode == REQUEST_DATE){
             mDate = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-
-            edt_pat_date.setText(mDate.toString());
+            SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
+            String date = fmt.format(mDate);
+            edt_pat_date.setText(date);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

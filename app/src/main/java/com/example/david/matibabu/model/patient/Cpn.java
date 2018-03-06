@@ -5,4 +5,10 @@ package com.example.david.matibabu.model.patient;
  */
 
 public class Cpn {
+    private int PatientUiD;
+    private String vat;
+    private String risque;
+    private String fer;
+    private String sp;
+
 }

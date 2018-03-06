@@ -67,7 +67,7 @@ public class PatientPresenter {
         final AppDatabase db = AppDatabase.getAppDatabase(context);
                 //AppDatabase.getAppDatabase();
         final PersonalInfo patient = new PersonalInfo();
-        patient.setPartnerName(name);
+        patient.setPatientName(name);
         patient.setPatientPhone(telephone);
         patient.setDateOfBirth(dob);
         patient.setEtatCivil(etatCivil);
@@ -95,8 +95,8 @@ public class PatientPresenter {
                     @Override
                     public void onSuccess(PersonalInfo personalInfo) {
                             // getting the added patient id and send it to antecents fragment
-                            int patientId = persone.get(persone.size()-1).getId();
-                            setPatientId(patientId);
+                          //  int patientId = persone.get(persone.size()-1).getId();
+                           //setPatientId(patientId);
                             Log.e("Boolean",String.valueOf(patientId));
                     }
 

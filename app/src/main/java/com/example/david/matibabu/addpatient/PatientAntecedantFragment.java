@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,6 +25,9 @@ import com.example.david.matibabu.addpatient.dialogFragment.DfMedical;
 import com.example.david.matibabu.addpatient.dialogFragment.DfObstericaux;
 import com.example.david.matibabu.model.patient.antecedents.Obstetricaux;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by david on 1/12/18.
  */
@@ -36,12 +40,16 @@ public class PatientAntecedantFragment extends Fragment {
     final private String DF_MEDICAUX = "DF_MEDICAL";
     final private String DF_GYNECO = "DF_GYNECO";
     final private String DF_OBSTERICO = "DF_OBSTERICO";
+    private static final String DATE_FRAGMENT = "dialogFragmnet";
+    private static final int REQUEST_DATE = 3;
 
     private TextView medical;
     private TextView obstericaux;
     private TextView gyneco;
+    private TextInputEditText edt_pat_regle_date;
     PatientPresenter mPresenter ;
     private int PatientId;
+    Date mDate;
 
 
     @Override
@@ -94,6 +102,16 @@ public class PatientAntecedantFragment extends Fragment {
 
             }
         });
+        edt_pat_regle_date = v.findViewById(R.id.pat_regle_date);
+        edt_pat_regle_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                DatePickerFragment dialog = new DatePickerFragment();
+                dialog.setTargetFragment(PatientAntecedantFragment.this,REQUEST_DATE);
+                dialog.show(fragmentManager,DATE_FRAGMENT);
+            }
+        });
         return v;
     }
 
@@ -143,6 +161,12 @@ public class PatientAntecedantFragment extends Fragment {
                     isAntChecked(data,DfObstericaux.EXTRAT_OBS_MORT),
                     isAntChecked(data,DfObstericaux.EXTRAT_OBS_COMPLICATION));
 
+        }
+        if (requestCode == REQUEST_DATE){
+            mDate = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
+            String date = fmt.format(mDate);
+            edt_pat_regle_date.setText(date);
         }
 
         super.onActivityResult(requestCode, resultCode, data);

@@ -29,7 +29,7 @@ public class PatientListActivity extends AppCompatActivity implements Navigation
 
         setContentView(R.layout.listpatient_act);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("geek");
+        toolbar.setTitle("Femme enciente");
         setSupportActionBar(toolbar);
         PatientListFragment patientListFragment = (PatientListFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.content_main);

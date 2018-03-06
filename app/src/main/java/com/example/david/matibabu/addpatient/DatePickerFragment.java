@@ -61,8 +61,7 @@ public class DatePickerFragment extends DialogFragment {
                         int month = mDatePicker.getMonth();
                         int day = mDatePicker.getDayOfMonth();
                         Date date = new GregorianCalendar(year,month,day).getTime();
-                        SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
-                       // fmt.format(date)
+
                         GregorianCalendar de = new GregorianCalendar(year,month,day);
                         sendResult(Activity.RESULT_OK,date);
                     }

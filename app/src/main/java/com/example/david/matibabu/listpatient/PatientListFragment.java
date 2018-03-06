@@ -2,6 +2,7 @@ package com.example.david.matibabu.listpatient;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.david.matibabu.R;
+import com.example.david.matibabu.patientcpn.PatientCpnActivity;
 import com.example.david.matibabu.utils.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -55,7 +57,7 @@ public class PatientListFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        mAdapter = new PatientAdapter(mPresenter.getAllPatient(getContext()));
+        mAdapter = new PatientAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
 
          return v;
@@ -95,5 +97,9 @@ public class PatientListFragment extends Fragment {
             colors.recycle();
         }
         return returnColor;
+    }
+    public void startActivity(){
+        Intent intent = new Intent(getActivity(), PatientCpnActivity.class);
+        startActivity(intent);
     }
 }

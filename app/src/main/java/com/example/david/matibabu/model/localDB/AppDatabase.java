@@ -25,6 +25,7 @@ AppDatabase extends RoomDatabase {
                 INSTANCE =
                         Room.databaseBuilder(context.getApplicationContext(),
                                 AppDatabase.class, "patient-database")
+                                .allowMainThreadQueries()
                                 .fallbackToDestructiveMigration()
                                 .build();
             }

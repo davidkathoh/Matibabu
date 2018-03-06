@@ -74,7 +74,14 @@
     <string name="obs_text_post_mature">Post-mature</string>
     <string name="obs_text_mort_ne">Mort-ne</string>
     <string name="obs_text_complication">Complications post-partum</string>
+    <string name="msg_date_regle">Date du dernier Regle</string>
 
     <!--error message-->
     <string name="error_message_empty_field">*</string>
+
+    <!--toolbar title-->
+    <string name="add_patient">Nouveau</string>
+    <string name="antecedent_patient">Antecedent</string>
+
+
 </resources>
