@@ -42,6 +42,7 @@ public class PatientAntecedantFragment extends Fragment {
     final private String DF_OBSTERICO = "DF_OBSTERICO";
     private static final String DATE_FRAGMENT = "dialogFragmnet";
     private static final int REQUEST_DATE = 3;
+   static String PATIENTUID="PATIENTID";
 
     private TextView medical;
     private TextView obstericaux;
@@ -49,14 +50,16 @@ public class PatientAntecedantFragment extends Fragment {
     private TextInputEditText edt_pat_regle_date;
     PatientPresenter mPresenter ;
     private int PatientId;
+    long patid;
     Date mDate;
 
+
+    public PatientAntecedantFragment() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -69,9 +72,11 @@ public class PatientAntecedantFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_patient_info_1,container,false);
-        mPresenter = new PatientPresenter();
-        PatientId = mPresenter.getPatientId();
+
+//        PatientId = mPresenter.getPatientId();
         setHasOptionsMenu(true);
+        Bundle bundle = getArguments();
+        long id = bundle.getLong("ID");
        gyneco  = v.findViewById(R.id.txt_gyneco);
         obstericaux = v.findViewById(R.id.txt_obsterical);
         medical = v.findViewById(R.id.txt_medical);
@@ -106,6 +111,7 @@ public class PatientAntecedantFragment extends Fragment {
         edt_pat_regle_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("IDD","user is "+id);
                 FragmentManager fragmentManager = getFragmentManager();
                 DatePickerFragment dialog = new DatePickerFragment();
                 dialog.setTargetFragment(PatientAntecedantFragment.this,REQUEST_DATE);
@@ -117,7 +123,7 @@ public class PatientAntecedantFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mPresenter = new PatientPresenter();
+
         if (resultCode!= Activity.RESULT_OK){
             return;
         }
@@ -131,7 +137,7 @@ public class PatientAntecedantFragment extends Fragment {
                    isAntChecked(data,DfGyneco.EXTRAT_GYNECO_Fist),
                    isAntChecked(data,DfGyneco.EXTRAT_GYNECO_CICA),
                    isAntChecked(data,DfGyneco.EXTRAT_GYNECO_STER));
-            //Log.e("GYN",String.valueOf(v));
+            Log.e("GYN","id is"+patid);
 
 
         }

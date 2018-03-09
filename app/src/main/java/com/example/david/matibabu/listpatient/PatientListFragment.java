@@ -19,10 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.david.matibabu.R;
+import com.example.david.matibabu.model.patient.PersonalInfo;
 import com.example.david.matibabu.patientcpn.PatientCpnActivity;
 import com.example.david.matibabu.utils.DividerItemDecoration;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by david on 2/12/18.
@@ -33,6 +35,7 @@ public class PatientListFragment extends Fragment {
     private SearchView mSearchView;
     private RecyclerView.Adapter mAdapter;
     ListPresenter mPresenter;
+    List<PersonalInfo> patient;
 
 
 
@@ -57,7 +60,8 @@ public class PatientListFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        mAdapter = new PatientAdapter(getContext());
+        patient = mPresenter.getAllPatient(getContext());
+        mAdapter = new PatientAdapter(patient);
         mRecyclerView.setAdapter(mAdapter);
 
          return v;

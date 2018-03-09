@@ -15,11 +15,13 @@ import android.view.MenuItem;
 
 import com.example.david.matibabu.R;
 import com.example.david.matibabu.listpatient.PatientListActivity;
+import com.example.david.matibabu.utils.ActivityUtils;
 import com.example.david.matibabu.view.fragment.CpnFragment;
 
 public class PatientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
        {
+           private PatientPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class PatientActivity extends AppCompatActivity
         setContentView(R.layout.addpatient_act);
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        PatientInfoFragment patientInfoFragment =
+                (PatientInfoFragment)getSupportFragmentManager().findFragmentById(R.id.content_main);
 
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
@@ -35,9 +39,14 @@ public class PatientActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        if (patientInfoFragment == null){
+            patientInfoFragment = PatientInfoFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),patientInfoFragment,R.id.content_main);
+        }
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        mPresenter = new PatientPresenter(patientInfoFragment,getApplicationContext());
     }
 
     @Override

@@ -28,12 +28,10 @@ import java.util.List;
 
 class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder> {
     List<PersonalInfo> users;
-    ListPresenter mPresenter;
     PatientListFragment mPatientListFragment = new PatientListFragment();
 
-    public PatientAdapter(Context context) {
-        mPresenter = new ListPresenter();
-        users = mPresenter.getAllPatient(context);
+    public PatientAdapter(List<PersonalInfo> personalInfos) {
+        this.users = personalInfos;
 
     }
 

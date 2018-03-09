@@ -19,9 +19,9 @@ import io.reactivex.Flowable;
 @Dao
 public interface PatientDao {
     @Insert
-    void insertPatient(PersonalInfo ... personalInfos);
+    long insertPatient(PersonalInfo personalInfos);
     @Query("SELECT * FROM Patient")
-    Flowable<List<PersonalInfo>> getAll();
+   List<PersonalInfo> getAll();
     @Insert
     void insertGyneco(GynecoChirurgi ... chirurgis);
     @Insert

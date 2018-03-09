@@ -1,9 +1,9 @@
 package com.example.david.matibabu.addpatient;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -18,12 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.example.david.matibabu.R;
-import com.example.david.matibabu.model.localDB.AppDatabase;
-import com.example.david.matibabu.model.patient.PersonalInfo;
-import com.example.david.matibabu.utils.ActivityUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -31,7 +28,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class PatientInfoFragment extends Fragment  {
+public class PatientInfoFragment extends Fragment implements PatientContract.View {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -57,11 +54,13 @@ public class PatientInfoFragment extends Fragment  {
     private TextInputLayout til_pat_dob;
     private TextInputEditText edt_coj_number;
     private Toolbar toolbar;
+    private LinearLayout mLinearLayout;
 
     Date mDate;
+    PatientContract.Presenter mPresenter;
 
 
-PatientPresenter mPatiente = new PatientPresenter() ;
+
 
     public PatientInfoFragment() {
         // Required empty public constructor
@@ -114,6 +113,7 @@ PatientPresenter mPatiente = new PatientPresenter() ;
         edt_urg_name = v.findViewById(R.id.edt_urg_name);
         edt_urg_phone = v.findViewById(R.id.edt_urg_num);
         edt_pat_date = (TextInputEditText)v.findViewById(R.id.pat_anniv);
+        mLinearLayout = v.findViewById(R.id.linearoot);
         til_pat_dob = v.findViewById(R.id.til_pat_dob);
         edt_pat_date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,44 +155,41 @@ PatientPresenter mPatiente = new PatientPresenter() ;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        PatientAntecedantFragment antecedant = new PatientAntecedantFragment();
-        Bundle bundle = new Bundle();
+
         int id = item.getItemId();
         if (id == R.id.menu_next){
 
-    mPatiente.createPatiente(edt_pat_name.getText().toString(),
+    mPresenter.createPatiente(edt_pat_name.getText().toString(),
             edt_pat_number.getText().toString(),
           mDate,marital_status.getText().toString(),
             edt_coj_name.getText().toString(),edt_coj_number.getText().toString(),
             edt_urg_name.getText().toString(),edt_urg_phone.getText().toString(),
            edt_pat_address.getText().toString(),getActivity().getApplicationContext());
 
-    getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_main,antecedant,"Fragment")
-                    .addToBackStack(null)
-                    .commit();
+
+            Snackbar.make(mLinearLayout,"Saved",Snackbar.LENGTH_LONG).show();
 
         }
         return super.onOptionsItemSelected(item);
     }
 
 
-
-
-
-    public void openAntecendent(Bundle bundle) {
+    @Override
+    public void openAntecendent(long id) {
         PatientAntecedantFragment antecedant = new PatientAntecedantFragment();
+        Bundle bundle = new Bundle();
+        bundle.putLong("ID",id);
         antecedant.setArguments(bundle);
+           Log.e("Open","Interface called ");
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_main,antecedant,"Fragment")
                 .addToBackStack(null)
                 .commit();
-//        PatientAntecedantFragment antecedantFragment = new PatientAntecedantFragment();
-//        antecedantFragment.setArguments(bundle);
-//        ActivityUtils.addFragmentToActivity(getFragmentManager(),antecedantFragment,
-//                R.id.content_main);
+    }
 
-
+    @Override
+    public void setPresenter(PatientContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }
 

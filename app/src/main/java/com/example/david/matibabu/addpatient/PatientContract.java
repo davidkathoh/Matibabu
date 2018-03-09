@@ -1,8 +1,9 @@
 package com.example.david.matibabu.addpatient;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.widget.CheckBox;
+
+import com.example.david.matibabu.utils.BasePresenter;
+import com.example.david.matibabu.utils.BaseView;
 
 import java.util.Date;
 
@@ -11,12 +12,12 @@ import java.util.Date;
  */
 
 public interface PatientContract {
-    interface Presenter{
-    void openAntecendent(Bundle bundle);}
-//    interface CreatePatiente{
-//        void createPatiente(String name, int telephone, Date dob,String etatCivil,
-//                            String cojName,int cojPhone,String urgName,int urgPhone,String address,
-//                            Context context);
-//    }
+    interface View extends BaseView<Presenter>{
+    void openAntecendent(long id);}
+   interface Presenter extends BasePresenter {
+       long createPatiente(String name, String telephone, Date dob, String etatCivil,
+                           String cojName, String cojPhone, String urgName,
+                           String urgPhone, String address, Context context);
+   }
 
 }
