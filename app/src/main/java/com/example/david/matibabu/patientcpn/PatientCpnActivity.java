@@ -15,6 +15,6 @@ public class PatientCpnActivity extends AppCompatActivity {
         setContentView(R.layout.patient_cpn_activity);
 
         CpnFragment cpnFragment =  new CpnFragment();
-        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),cpnFragment,R.id.content_main);
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),cpnFragment,R.id.container);
     }
 }

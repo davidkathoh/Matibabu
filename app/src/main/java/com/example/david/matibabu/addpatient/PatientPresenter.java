@@ -30,9 +30,7 @@ import static com.bumptech.glide.util.Preconditions.checkNotNull;
  */
 
 public class PatientPresenter implements PatientContract.Presenter{
-    GynecoChirurgi mChirurgi;
-    Medicaux mMedicaux;
-    Obstetricaux mObstetricaux;
+
     private String EXTRAT_PATIENT_ID = "PATIENT_UID";
     private int patientId;
      long uid;
@@ -107,63 +105,6 @@ public class PatientPresenter implements PatientContract.Presenter{
             mCompositeDisposable.add(subscribe);
       //  Log.e("Saved","patient id is"+ da[0]);
  return uid;
-    }
-    @Override
-    public GynecoChirurgi insertGyn(
-             long patient_id,
-             boolean cesarienne,
-             boolean cerclage,
-             boolean fibromeUterin,
-             boolean fractureBassin,
-             boolean geu,
-             boolean fistule,
-             boolean uterusCicatriciel,
-             boolean steriliteTraitement){
-        GynecoChirurgi gynecoChirurgi
-                = new GynecoChirurgi(getPatientId(),cesarienne,cerclage,fibromeUterin
-                        ,fractureBassin,geu,fistule,uterusCicatriciel,steriliteTraitement);
-        Log.e("BOOLEAN",String.valueOf(gynecoChirurgi.getPatient_id()));
-       mChirurgi = gynecoChirurgi;
-        return gynecoChirurgi;
-    }
-    @Override
-    public Medicaux inserMedi(
-            long patientId, boolean tbc, boolean hta,
-            boolean sca_ss, boolean dbt, boolean car,
-            boolean mgf, boolean syphylis,
-            boolean vih_sida, boolean vvs, boolean pep){
-                 Medicaux med =
-                         new Medicaux( patientId, tbc,
-                     hta,  sca_ss,dbt, car, mgf, syphylis,vih_sida,  vvs,  pep);
-                 mMedicaux = med;
-                 return med;
-    }
-    @Override
-    public Obstetricaux insertObs(long patientId, boolean parite, boolean gestite,
-                                  boolean enfantEnVie, boolean avortement, boolean dystocie, boolean eutocie, boolean premature, boolean post_mature,
-                                  boolean mort_ne, boolean complicationPostPartum){
-                Obstetricaux obstetricaux
-                        = new Obstetricaux( patientId,  parite,
-        gestite, enfantEnVie, avortement,
-         dystocie, eutocie, premature,
-         post_mature, mort_ne,  complicationPostPartum);
-                mObstetricaux = obstetricaux;
-                return obstetricaux;
-
-    }
-    public void add(Context context){
-        Disposable suscribe = Completable.create(new CompletableOnSubscribe() {
-            @Override
-            public void subscribe(CompletableEmitter e) throws Exception {
-                addAntGyn(mChirurgi,context);
-                        addAntMedi(mMedicaux,context);
-                        addAntObs(mObstetricaux,context);
-            }
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(()-> Log.e("SAVED","Antecedent saved"),
-                        e -> Log.e("NotSaved",e.toString()));
-        mCompositeDisposable.add(suscribe);
     }
 
     public long getUid() {

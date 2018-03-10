@@ -69,6 +69,7 @@ public class DfObstericaux extends DialogFragment {
     }
     public void sendResult(int resultCode){
         Intent i = new Intent();
+        i.putExtra(EXTRAT_OBS_PARITE,mParite.isChecked());
         i.putExtra(EXTRAT_OBS_AVORT,mAvortement.isChecked());
         i.putExtra(EXTRAT_OBS_COMPLICATION,mComplication.isChecked());
         i.putExtra(EXTRAT_OBS_DYSTO,mDystocie.isChecked());

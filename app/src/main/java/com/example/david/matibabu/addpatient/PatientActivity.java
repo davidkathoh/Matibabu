@@ -22,6 +22,7 @@ public class PatientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
        {
            private PatientPresenter mPresenter;
+           private PatientAntPresenter mAntPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,9 @@ public class PatientActivity extends AppCompatActivity
         setContentView(R.layout.addpatient_act);
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         PatientInfoFragment patientInfoFragment =
                 (PatientInfoFragment)getSupportFragmentManager().findFragmentById(R.id.content_main);
-
-
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -46,7 +46,10 @@ public class PatientActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // initializing the presenter
         mPresenter = new PatientPresenter(patientInfoFragment,getApplicationContext());
+
     }
 
     @Override

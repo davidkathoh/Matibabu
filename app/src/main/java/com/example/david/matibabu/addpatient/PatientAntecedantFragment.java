@@ -24,6 +24,7 @@ import com.example.david.matibabu.addpatient.dialogFragment.DfGyneco;
 import com.example.david.matibabu.addpatient.dialogFragment.DfMedical;
 import com.example.david.matibabu.addpatient.dialogFragment.DfObstericaux;
 import com.example.david.matibabu.model.patient.antecedents.Obstetricaux;
+import com.example.david.matibabu.patientcpn.PatientCpnActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,7 +33,7 @@ import java.util.Date;
  * Created by david on 1/12/18.
  */
 
-public class PatientAntecedantFragment extends Fragment  implements PatientContract.View{
+public class PatientAntecedantFragment extends Fragment {
 
     private static final int REQUEST_MEDICAUX = 0;
     private static final int REQUEST_GYNECO = 1;
@@ -48,8 +49,8 @@ public class PatientAntecedantFragment extends Fragment  implements PatientContr
     private TextView obstericaux;
     private TextView gyneco;
     private TextInputEditText edt_pat_regle_date;
-    //PatientPresenter mPresenter ;
-    PatientContract.Presenter mPresenter;
+
+    PatientAntPresenter mPresenter;
     private int PatientId;
     long patid;
     Date mDate;
@@ -73,7 +74,7 @@ public class PatientAntecedantFragment extends Fragment  implements PatientContr
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_patient_info_1,container,false);
-//        mPresenter = new PatientPresenter(,getContext()) ;
+      mPresenter = new PatientAntPresenter(getContext());
 //        PatientId = mPresenter.getPatientId();
         setHasOptionsMenu(true);
         Bundle bundle = getArguments();
@@ -90,14 +91,11 @@ public class PatientAntecedantFragment extends Fragment  implements PatientContr
 
             }
         });
-        gyneco.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DfGyneco df = new DfGyneco();
-                df.setTargetFragment(PatientAntecedantFragment.this,REQUEST_GYNECO);
-                showFragmentDialog(df,DF_GYNECO);
+        gyneco.setOnClickListener(v1 -> {
+            DfGyneco df = new DfGyneco();
+            df.setTargetFragment(PatientAntecedantFragment.this,REQUEST_GYNECO);
+            showFragmentDialog(df,DF_GYNECO);
 
-            }
         });
         obstericaux.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +110,6 @@ public class PatientAntecedantFragment extends Fragment  implements PatientContr
         edt_pat_regle_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("IDD","user is "+UID);
                 FragmentManager fragmentManager = getFragmentManager();
                 DatePickerFragment dialog = new DatePickerFragment();
                 dialog.setTargetFragment(PatientAntecedantFragment.this,REQUEST_DATE);
@@ -129,7 +126,7 @@ public class PatientAntecedantFragment extends Fragment  implements PatientContr
             return;
         }
         if (requestCode == REQUEST_GYNECO){
-           mPresenter.insertGyn(PatientId,
+           mPresenter.insertGyn(UID,
                    isAntChecked(data,DfGyneco.EXTRAT_GYNECO_CESA),
                     isAntChecked(data,DfGyneco.EXTRAT_GYNECO_CERC),
                    isAntChecked(data,DfGyneco.EXTRAT_GYNECO_FIBRO),
@@ -138,12 +135,10 @@ public class PatientAntecedantFragment extends Fragment  implements PatientContr
                    isAntChecked(data,DfGyneco.EXTRAT_GYNECO_Fist),
                    isAntChecked(data,DfGyneco.EXTRAT_GYNECO_CICA),
                    isAntChecked(data,DfGyneco.EXTRAT_GYNECO_STER));
-            Log.e("GYN","id is"+UID);
-
 
         }
         if (requestCode ==REQUEST_MEDICAUX){
-            mPresenter.inserMedi(PatientId,
+            mPresenter.inserMedi(UID,
                     isAntChecked(data,DfMedical.EXTRAT_MEDI_TBC),
                     isAntChecked(data,DfMedical.EXTRAT_MEDI_HTA),
                     isAntChecked(data,DfMedical.EXTRAT_MEDI_SCA),
@@ -156,7 +151,7 @@ public class PatientAntecedantFragment extends Fragment  implements PatientContr
                     isAntChecked(data,DfMedical.EXTRAT_MEDI_PEP));
         }
         if (requestCode == REQUEST_OBSTERICO){
-            mPresenter.insertObs(PatientId,
+            mPresenter.insertObs(UID,
                     isAntChecked(data,DfObstericaux.EXTRAT_OBS_PARITE),
                     isAntChecked(data,DfObstericaux.EXTRAT_OBS_GESTILE),
                     isAntChecked(data,DfObstericaux.EXTRAT_OBS_ENFA),
@@ -182,16 +177,17 @@ public class PatientAntecedantFragment extends Fragment  implements PatientContr
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.menu.save){
-          //  mPresenter.add(getContext());
-
-
+        if (id == R.id.menu_save){
+        mPresenter.add(getContext());
+            openActivity();
+        Log.e("DAVID","Kathoh");
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.save,menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -204,13 +200,11 @@ public class PatientAntecedantFragment extends Fragment  implements PatientContr
        return   (Boolean) data.getSerializableExtra(EXTRAT_KEY) ;
     }
 
-    @Override
-    public void setPresenter(PatientContract.Presenter presenter) {
-        mPresenter = presenter;
-    }
+public void openActivity(){
+        Intent i = new Intent(getActivity(), PatientCpnActivity.class);
+        i.putExtra("ID",UID);
+        startActivity(i);
 
-    @Override
-    public void openAntecendent(long id) {
+}
 
-    }
 }
