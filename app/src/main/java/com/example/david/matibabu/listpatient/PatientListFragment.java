@@ -54,7 +54,7 @@ public class PatientListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.patient_recycle_view,container,false);
         mRecyclerView = v.findViewById(R.id.pat_recycle_view);
-        mPresenter = new ListPresenter();
+        mPresenter = new ListPresenter(getContext());
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -91,17 +91,6 @@ public class PatientListFragment extends Fragment {
 
     }
 
-    public int getRandomMaterialColor(String typeColor) {
-        int returnColor = Color.GRAY;
-           int arrayId = getResources().getIdentifier("mdcolor"+typeColor,"array",getActivity().getPackageName());
-        if (arrayId != 0) {
-            TypedArray colors = getResources().obtainTypedArray(arrayId);
-            int index = (int) (Math.random() * colors.length());
-            returnColor = colors.getColor(index, Color.GRAY);
-            colors.recycle();
-        }
-        return returnColor;
-    }
     public void startActivity(){
         Intent intent = new Intent(getActivity(), PatientCpnActivity.class);
         startActivity(intent);

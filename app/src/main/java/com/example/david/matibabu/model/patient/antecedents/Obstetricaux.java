@@ -19,7 +19,7 @@ import java.util.Date;
 public class Obstetricaux {
     @PrimaryKey(autoGenerate = true)
     private int antObstId;
-    private int patientId;
+    private long patientId;
     private boolean parite;
     private boolean gestite;
     private boolean enfantEnVie;
@@ -35,7 +35,7 @@ public class Obstetricaux {
     private Date lastBirthdate;
     private boolean complicationPostPartum;
 
-    public Obstetricaux(int patientId, boolean parite, boolean gestite, boolean enfantEnVie, boolean avortement, boolean dystocie, boolean eutocie, boolean premature, boolean post_mature, boolean mort_ne, boolean complicationPostPartum) {
+    public Obstetricaux(long patientId, boolean parite, boolean gestite, boolean enfantEnVie, boolean avortement, boolean dystocie, boolean eutocie, boolean premature, boolean post_mature, boolean mort_ne, boolean complicationPostPartum) {
         this.patientId = patientId;
         this.parite = parite;
         this.gestite = gestite;
@@ -161,11 +161,11 @@ public class Obstetricaux {
         this.antObstId = antObstId;
     }
 
-    public int getPatientId() {
+    public long getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(int patientId) {
+    public void setPatientId(long patientId) {
         this.patientId = patientId;
     }
 }

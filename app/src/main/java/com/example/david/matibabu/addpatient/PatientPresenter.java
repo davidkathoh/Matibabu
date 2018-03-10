@@ -108,8 +108,9 @@ public class PatientPresenter implements PatientContract.Presenter{
       //  Log.e("Saved","patient id is"+ da[0]);
  return uid;
     }
+    @Override
     public GynecoChirurgi insertGyn(
-             int patient_id,
+             long patient_id,
              boolean cesarienne,
              boolean cerclage,
              boolean fibromeUterin,
@@ -125,8 +126,9 @@ public class PatientPresenter implements PatientContract.Presenter{
        mChirurgi = gynecoChirurgi;
         return gynecoChirurgi;
     }
+    @Override
     public Medicaux inserMedi(
-            int patientId, boolean tbc, boolean hta,
+            long patientId, boolean tbc, boolean hta,
             boolean sca_ss, boolean dbt, boolean car,
             boolean mgf, boolean syphylis,
             boolean vih_sida, boolean vvs, boolean pep){
@@ -136,7 +138,8 @@ public class PatientPresenter implements PatientContract.Presenter{
                  mMedicaux = med;
                  return med;
     }
-    public Obstetricaux insertObs(int patientId, boolean parite, boolean gestite,
+    @Override
+    public Obstetricaux insertObs(long patientId, boolean parite, boolean gestite,
                                   boolean enfantEnVie, boolean avortement, boolean dystocie, boolean eutocie, boolean premature, boolean post_mature,
                                   boolean mort_ne, boolean complicationPostPartum){
                 Obstetricaux obstetricaux

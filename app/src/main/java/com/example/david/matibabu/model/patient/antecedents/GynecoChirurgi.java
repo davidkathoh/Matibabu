@@ -17,7 +17,7 @@ public class GynecoChirurgi {
     @PrimaryKey(autoGenerate = true)
     private int antGynId;
     @ColumnInfo(name = "patientId")
-    private int patient_id;
+    private long patient_id;
     private boolean cesarienne;
     private boolean cerclage;
     private boolean fibromeUterin;
@@ -28,7 +28,7 @@ public class GynecoChirurgi {
     private boolean steriliteTraitement;
 
 
-    public GynecoChirurgi(int patient_id, boolean cesarienne, boolean cerclage, boolean fibromeUterin, boolean fractureBassin, boolean geu, boolean fistule, boolean uterusCicatriciel, boolean steriliteTraitement) {
+    public GynecoChirurgi(long patient_id, boolean cesarienne, boolean cerclage, boolean fibromeUterin, boolean fractureBassin, boolean geu, boolean fistule, boolean uterusCicatriciel, boolean steriliteTraitement) {
         this.patient_id = patient_id;
         this.cesarienne = cesarienne;
         this.cerclage = cerclage;
@@ -112,7 +112,7 @@ public class GynecoChirurgi {
         this.antGynId = antGynId;
     }
 
-    public int getPatient_id() {
+    public long getPatient_id() {
         return patient_id;
     }
 

@@ -21,7 +21,7 @@ public interface PatientDao {
     @Insert
     long insertPatient(PersonalInfo personalInfos);
     @Query("SELECT * FROM Patient")
-   List<PersonalInfo> getAll();
+   Flowable<List<PersonalInfo>> getAll();
     @Insert
     void insertGyneco(GynecoChirurgi ... chirurgis);
     @Insert

@@ -23,6 +23,7 @@ import com.example.david.matibabu.utils.ActivityUtils;
  */
 
 public class PatientListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    ListPresenter mListPresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,7 @@ public class PatientListActivity extends AppCompatActivity implements Navigation
         }else{
             Log.e("Errors","patent null");
         }
+        mListPresenter = new ListPresenter(getApplicationContext());
        // ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),new PatientListFragment(),
         //R.id.content_main);
 

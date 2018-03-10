@@ -15,7 +15,7 @@ import com.example.david.matibabu.model.patient.PersonalInfo;
 public class Medicaux {
     @PrimaryKey(autoGenerate = true)
     private int antMediId;
-    private int patientId;
+    private long patientId;
     private boolean tbc;
     private boolean hta;
     private boolean sca_ss;
@@ -28,7 +28,7 @@ public class Medicaux {
     private boolean vvs;
     private boolean pep;
 
-    public Medicaux(int patientId, boolean tbc, boolean hta, boolean sca_ss, boolean dbt, boolean car, boolean mgf, boolean syphylis, boolean vih_sida, boolean vvs, boolean pep) {
+    public Medicaux(long patientId, boolean tbc, boolean hta, boolean sca_ss, boolean dbt, boolean car, boolean mgf, boolean syphylis, boolean vih_sida, boolean vvs, boolean pep) {
         this.patientId = patientId;
         this.tbc = tbc;
         this.hta = hta;
@@ -139,11 +139,11 @@ public class Medicaux {
         this.antMediId = antMediId;
     }
 
-    public int getPatientId() {
+    public long getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(int patientId) {
+    public void setPatientId(long patientId) {
         this.patientId = patientId;
     }
 }
