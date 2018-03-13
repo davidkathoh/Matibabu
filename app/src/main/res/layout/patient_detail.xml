@@ -41,30 +41,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <Button
+                android:id="@+id/cpn_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorWhite"
                 android:text="CPN1"
-                android:textColor="@color/colorPrimary"
-                android:backgroundTint="@color/colorWhite"/>
+                android:textColor="@color/colorPrimary" />
+
             <Button
+                android:id="@+id/cpn_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorWhite"
                 android:text="CPN2"
-                android:textColor="@color/colorPrimary"
-                android:backgroundTint="@color/colorWhite"/>
+                android:textColor="@color/colorPrimary" />
+
             <Button
+                android:id="@+id/cpn_three"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorWhite"
                 android:text="CPN3"
-                android:textColor="@color/colorPrimary"
-                android:backgroundTint="@color/colorWhite"/>
+                android:textColor="@color/colorPrimary" />
+
             <Button
+                android:id="@+id/cpn_four"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorWhite"
                 android:text="CPN4"
-                android:textColor="@color/colorPrimary"
-                android:backgroundTint="@color/colorWhite"/>
+                android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
 

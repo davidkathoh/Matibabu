@@ -1,8 +1,7 @@
-package com.example.david.matibabu.patientcpn;
+package com.example.david.matibabu.patientdetail;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.FrameLayout;
 
 import com.example.david.matibabu.R;
 import com.example.david.matibabu.utils.ActivityUtils;
@@ -14,7 +13,7 @@ public class PatientCpnActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.patient_cpn_activity);
 
-        CpnFragment cpnFragment =  new CpnFragment();
-        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),cpnFragment,R.id.container);
+        CpnDetailFragment cpnDetailFragment =  new CpnDetailFragment();
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), cpnDetailFragment,R.id.container);
     }
 }

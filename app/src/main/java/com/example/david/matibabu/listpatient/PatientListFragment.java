@@ -3,8 +3,6 @@ package com.example.david.matibabu.listpatient;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,10 +18,9 @@ import android.view.ViewGroup;
 
 import com.example.david.matibabu.R;
 import com.example.david.matibabu.model.patient.PersonalInfo;
-import com.example.david.matibabu.patientcpn.PatientCpnActivity;
+import com.example.david.matibabu.patientdetail.PatientCpnActivity;
 import com.example.david.matibabu.utils.DividerItemDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -23,8 +22,7 @@ import com.example.david.matibabu.R;
 import com.example.david.matibabu.addpatient.dialogFragment.DfGyneco;
 import com.example.david.matibabu.addpatient.dialogFragment.DfMedical;
 import com.example.david.matibabu.addpatient.dialogFragment.DfObstericaux;
-import com.example.david.matibabu.model.patient.antecedents.Obstetricaux;
-import com.example.david.matibabu.patientcpn.PatientCpnActivity;
+import com.example.david.matibabu.patientdetail.PatientCpnActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -180,7 +178,7 @@ public class PatientAntecedantFragment extends Fragment {
         if (id == R.id.menu_save){
         mPresenter.add(getContext());
             openActivity();
-        Log.e("DAVID","Kathoh");
+
         }
         return super.onOptionsItemSelected(item);
     }
