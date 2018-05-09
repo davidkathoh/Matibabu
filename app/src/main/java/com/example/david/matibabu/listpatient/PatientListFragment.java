@@ -3,6 +3,8 @@ package com.example.david.matibabu.listpatient;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,22 +21,21 @@ import android.view.ViewGroup;
 
 import com.example.david.matibabu.R;
 import com.example.david.matibabu.model.patient.PersonalInfo;
-import com.example.david.matibabu.patientdetail.PatientCpnActivity;
+import com.example.david.matibabu.patientdetail.PatientDetailActivity;
 import com.example.david.matibabu.utils.DividerItemDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by david on 2/12/18.
  */
 
-public class PatientListFragment extends Fragment {
+public class PatientListFragment extends Fragment  implements PatientListContract.View{
     private RecyclerView mRecyclerView;
     private SearchView mSearchView;
-    private RecyclerView.Adapter mAdapter;
-    ListPresenter mPresenter;
-    List<PersonalInfo> patient;
-
+    private PatientAdapter mPatientAdapter;
+    private PatientListContract.Presenter mPresenter;
 
 
 
@@ -43,6 +45,7 @@ public class PatientListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(true);
     }
 
@@ -51,15 +54,14 @@ public class PatientListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.patient_recycle_view,container,false);
         mRecyclerView = v.findViewById(R.id.pat_recycle_view);
-        mPresenter = new ListPresenter(getContext());
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
+       LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        patient = mPresenter.getAllPatient(getContext());
-        mAdapter = new PatientAdapter(patient);
-        mRecyclerView.setAdapter(mAdapter);
+        mPresenter.getAllPatient();
+        //mRecyclerView.setAdapter(mPatientAdapter);
 
          return v;
     }
@@ -77,19 +79,49 @@ public class PatientListFragment extends Fragment {
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                mPatientAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                mPatientAdapter.getFilter().filter(newText);
                 return false;
+
             }
         });
 
     }
 
-    public void startActivity(){
-        Intent intent = new Intent(getActivity(), PatientCpnActivity.class);
-        startActivity(intent);
+
+    public void showPatients(List<PersonalInfo> personalInfos){
+        mPatientAdapter.setPatientList(personalInfos);
     }
+
+
+    @Override
+    public void setPresenter(PatientListContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void loadPatients(List<PersonalInfo> personalInfos) {
+
+
+        mPatientAdapter = new PatientAdapter(personalInfos);
+        mRecyclerView.setAdapter(mPatientAdapter);
+        Log.e("tag", "called");
+    }
+
+    @Override
+    public void showNoPatient() {
+
+    }
+
+    @Override
+    public void openCpnActivity(long patientId) {
+
+    }
+
+
 }

@@ -20,22 +20,22 @@ public class Obstetricaux {
     @PrimaryKey(autoGenerate = true)
     private int antObstId;
     private long patientId;
-    private boolean parite;
-    private boolean gestite;
-    private boolean enfantEnVie;
-    private boolean avortement;
-    private boolean dystocie;
-    private boolean eutocie;
-    private boolean poidsDeNaissanceEleve;
-    private boolean premature;
-    private boolean post_mature;
-    private boolean mort_ne;
+    private int parite;
+    private int gestite;
+    private int enfantEnVie;
+    private int avortement;
+    private int dystocie;
+    private int eutocie;
+    private int poidsDeNaissanceEleve;
+    private int premature;
+    private int post_mature;
+    private int mort_ne;
     private boolean mort_avant7jours;
     @TypeConverters({TimestampConverter.class})
     private Date lastBirthdate;
     private boolean complicationPostPartum;
 
-    public Obstetricaux(long patientId, boolean parite, boolean gestite, boolean enfantEnVie, boolean avortement, boolean dystocie, boolean eutocie, boolean premature, boolean post_mature, boolean mort_ne, boolean complicationPostPartum) {
+    public Obstetricaux(long patientId, int parite, int gestite, int enfantEnVie, int avortement, int dystocie, int eutocie, int premature, int post_mature, int mort_ne, boolean complicationPostPartum) {
         this.patientId = patientId;
         this.parite = parite;
         this.gestite = gestite;
@@ -49,83 +49,83 @@ public class Obstetricaux {
         this.complicationPostPartum = complicationPostPartum;
     }
 
-    public boolean isParite() {
+    public int getParite() {
         return parite;
     }
 
-    public void setParite(boolean parite) {
+    public void setParite(int parite) {
         this.parite = parite;
     }
 
-    public boolean isGestite() {
+    public int getGestite() {
         return gestite;
     }
 
-    public void setGestite(boolean gestite) {
+    public void setGestite(int gestite) {
         this.gestite = gestite;
     }
 
-    public boolean isEnfantEnVie() {
+    public int getEnfantEnVie() {
         return enfantEnVie;
     }
 
-    public void setEnfantEnVie(boolean enfantEnVie) {
+    public void setEnfantEnVie(int enfantEnVie) {
         this.enfantEnVie = enfantEnVie;
     }
 
-    public boolean isAvortement() {
+    public int getAvortement() {
         return avortement;
     }
 
-    public void setAvortement(boolean avortement) {
+    public void setAvortement(int avortement) {
         this.avortement = avortement;
     }
 
-    public boolean isDystocie() {
+    public int getDystocie() {
         return dystocie;
     }
 
-    public void setDystocie(boolean dystocie) {
+    public void setDystocie(int dystocie) {
         this.dystocie = dystocie;
     }
 
-    public boolean isEutocie() {
+    public int getEutocie() {
         return eutocie;
     }
 
-    public void setEutocie(boolean eutocie) {
+    public void setEutocie(int eutocie) {
         this.eutocie = eutocie;
     }
 
-    public boolean isPoidsDeNaissanceEleve() {
+    public int getPoidsDeNaissanceEleve() {
         return poidsDeNaissanceEleve;
     }
 
-    public void setPoidsDeNaissanceEleve(boolean poidsDeNaissanceEleve) {
+    public void setPoidsDeNaissanceEleve(int poidsDeNaissanceEleve) {
         this.poidsDeNaissanceEleve = poidsDeNaissanceEleve;
     }
 
-    public boolean isPremature() {
+    public int getPremature() {
         return premature;
     }
 
-    public void setPremature(boolean premature) {
+    public void setPremature(int premature) {
         this.premature = premature;
     }
 
-    public boolean isPost_mature() {
+    public int getPost_mature() {
         return post_mature;
     }
 
-    public void setPost_mature(boolean post_mature) {
+    public void setPost_mature(int post_mature) {
         this.post_mature = post_mature;
     }
 
-    public boolean isMort_ne() {
+    public int getMort_ne() {
         return mort_ne;
     }
 
-    public void setMort_ne(boolean mort_ne) {
+    public void setMort_ne(int mort_ne) {
         this.mort_ne = mort_ne;
     }
 
@@ -145,7 +145,7 @@ public class Obstetricaux {
         this.lastBirthdate = lastBirthdate;
     }
 
-    public boolean getComplicationPostPartum() {
+    public boolean isComplicationPostPartum() {
         return complicationPostPartum;
     }
 

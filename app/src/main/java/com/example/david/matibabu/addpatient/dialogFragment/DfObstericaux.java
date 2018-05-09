@@ -45,16 +45,16 @@ public class DfObstericaux extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = LayoutInflater.from(getContext())
                 .inflate(R.layout.dialogfr_obsterico,null);
-        mGestile = v.findViewById(R.id.chb_gestile);
-        mEnfant =  v.findViewById(R.id.chb_enfant);
-        mAvortement = v.findViewById(R.id.chb_avortement);
-        mDystocie = v.findViewById(R.id.chb_dystocie);
-        mEutocie = v.findViewById(R.id.chb_eutocie);
-        mParite = v.findViewById(R.id.chb_parite);
-        mPremature = v.findViewById(R.id.chb_premature);
-        mPostPremature = v.findViewById(R.id.chb_postmature);
-        mMort = v.findViewById(R.id.chb_mort);
-        mComplication = v.findViewById(R.id.chb_complication);
+//        mGestile = v.findViewById(R.id.chb_gestile);
+//        mEnfant =  v.findViewById(R.id.chb_enfant);
+//        mAvortement = v.findViewById(R.id.chb_avortement);
+//        mDystocie = v.findViewById(R.id.chb_dystocie);
+//        mEutocie = v.findViewById(R.id.chb_eutocie);
+//        mParite = v.findViewById(R.id.chb_parite);
+//        mPremature = v.findViewById(R.id.chb_premature);
+//        mPostPremature = v.findViewById(R.id.chb_postmature);
+//        mMort = v.findViewById(R.id.chb_mort);
+//        mComplication = v.findViewById(R.id.chb_complication);
         return new AlertDialog.Builder(getContext())
                 .setTitle(R.string.ant_obstericaux)
                 .setView(v)
@@ -69,16 +69,16 @@ public class DfObstericaux extends DialogFragment {
     }
     public void sendResult(int resultCode){
         Intent i = new Intent();
-        i.putExtra(EXTRAT_OBS_PARITE,mParite.isChecked());
-        i.putExtra(EXTRAT_OBS_AVORT,mAvortement.isChecked());
-        i.putExtra(EXTRAT_OBS_COMPLICATION,mComplication.isChecked());
-        i.putExtra(EXTRAT_OBS_DYSTO,mDystocie.isChecked());
-        i.putExtra(EXTRAT_OBS_ENFA,mEnfant.isChecked());
-        i.putExtra(EXTRAT_OBS_EUTO,mEutocie.isChecked());
-        i.putExtra(EXTRAT_OBS_GESTILE,mGestile.isChecked());
-        i.putExtra(EXTRAT_OBS_POSTMATURE,mPostPremature.isChecked());
-        i.putExtra(EXTRAT_OBS_PREMATURE,mPremature.isChecked());
-        i.putExtra(EXTRAT_OBS_MORT,mMort.isChecked());
+//        i.putExtra(EXTRAT_OBS_PARITE,mParite.isChecked());
+//        i.putExtra(EXTRAT_OBS_AVORT,mAvortement.isChecked());
+//        i.putExtra(EXTRAT_OBS_COMPLICATION,mComplication.isChecked());
+//        i.putExtra(EXTRAT_OBS_DYSTO,mDystocie.isChecked());
+//        i.putExtra(EXTRAT_OBS_ENFA,mEnfant.isChecked());
+//        i.putExtra(EXTRAT_OBS_EUTO,mEutocie.isChecked());
+//        i.putExtra(EXTRAT_OBS_GESTILE,mGestile.isChecked());
+//        i.putExtra(EXTRAT_OBS_POSTMATURE,mPostPremature.isChecked());
+//        i.putExtra(EXTRAT_OBS_PREMATURE,mPremature.isChecked());
+//        i.putExtra(EXTRAT_OBS_MORT,mMort.isChecked());
 
         getTargetFragment().
                 onActivityResult(getTargetRequestCode(),resultCode,i);

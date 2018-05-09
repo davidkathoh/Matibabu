@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.david.matibabu">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,13 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.activity.AuthentificationActivity"
+            android:name=".account.signup.SignupActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".addpatient.PatientActivity"
@@ -32,7 +29,52 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".patientdetail.PatientCpnActivity"></activity>
+        <activity
+            android:name=".patientdetail.PatientDetailActivity"
+            android:parentActivityName=".listpatient.PatientListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".listpatient.PatientListActivity" />
+        </activity>
+        <activity
+            android:name=".cpnfour.CpnFourActivity"
+            android:parentActivityName=".patientdetail.PatientDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".patientdetail.PatientDetailActivity" />
+        </activity>
+        <activity
+            android:name=".cpnone.CpnOneActivity"
+            android:parentActivityName=".patientdetail.PatientDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".patientdetail.PatientDetailActivity" />
+        </activity>
+        <activity
+            android:name=".cpnthree.CpnThreeActivity"
+            android:parentActivityName=".patientdetail.PatientDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".patientdetail.PatientDetailActivity" />
+        </activity>
+        <activity
+            android:name=".cpntwo.CpnTwoActivity"
+            android:parentActivityName=".patientdetail.PatientDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".patientdetail.PatientDetailActivity" />
+        </activity>
+        <activity android:name=".home.HomeActivity" />
+        <activity android:name=".introscreen.IntroScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import android.arch.persistence.room.TypeConverters;
 import com.example.david.matibabu.model.patient.antecedents.GynecoChirurgi;
 import com.example.david.matibabu.utils.TimestampConverter;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -17,9 +18,12 @@ import java.util.Date;
  */
 @Entity(tableName = "Patient")
 public class PersonalInfo {
+
+
    @PrimaryKey(autoGenerate = true)
    @ColumnInfo(name = "id")
-    private int id;
+   private int id ;
+
    @ColumnInfo(name = "pat_name")
     private String patientName;
    @ColumnInfo(name = "pat_phone")
@@ -45,9 +49,14 @@ public class PersonalInfo {
     private String rescuePhone;
     @TypeConverters({TimestampConverter.class})
    @ColumnInfo(name = "Registration_date")
-   private Date registrationDate;
+   private Date registrationDate = Calendar.getInstance().getTime();
+    @TypeConverters({TimestampConverter.class})
+    private Date lastPeriodDate ;
+    @TypeConverters({TimestampConverter.class})
+    private Date probableDueDate;
     @Ignore
     private int color = -1;
+
 
     public int getId() {
         return id;
@@ -159,5 +168,21 @@ public class PersonalInfo {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    public Date getLastPeriodDate() {
+        return lastPeriodDate;
+    }
+
+    public void setLastPeriodDate(Date lastPeriodDate) {
+        this.lastPeriodDate = lastPeriodDate;
+    }
+
+    public Date getProbableDueDate() {
+        return probableDueDate;
+    }
+
+    public void setProbableDueDate(Date probableDueDate) {
+        this.probableDueDate = probableDueDate;
     }
 }

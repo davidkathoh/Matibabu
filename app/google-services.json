@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "449347276059",
+    "firebase_url": "https://matibabu-rdc.firebaseio.com",
+    "project_id": "matibabu-rdc",
+    "storage_bucket": "matibabu-rdc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449347276059:android:b51d10366476b830",
+        "android_client_info": {
+          "package_name": "com.example.david.matibabu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "449347276059-oef5b94n1lp4s0092p50uigqpln8c3jh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXFnLPZkC1EGpLVs5fF8oxULSGFFJXpzU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

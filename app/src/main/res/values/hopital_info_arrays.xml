@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list_province">
+        <item>Nord Kivu</item>
+    </string-array>
+    <string-array name="nk_list_zone_sante">
+        <item>Goma</item>
+        <item>Nyiragongo</item>
+        <item>Karisimbi</item>
+        <item>Katwa</item>
+    </string-array>
+    <string-array name="list_structure_type">
+        <item>Hopital de reference</item>
+        <item>Centre de sante</item>
+    </string-array>
+</resources>

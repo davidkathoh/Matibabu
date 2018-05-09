@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.example.david.matibabu.R;
 import com.example.david.matibabu.addpatient.PatientActivity;
 import com.example.david.matibabu.addpatient.PatientInfoFragment;
+import com.example.david.matibabu.home.HomeActivity;
 import com.example.david.matibabu.utils.ActivityUtils;
 
 /**
@@ -30,7 +31,7 @@ public class PatientListActivity extends AppCompatActivity implements Navigation
 
         setContentView(R.layout.listpatient_act);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Femme enciente");
+        toolbar.setTitle(R.string.tlb_list_activity);
         setSupportActionBar(toolbar);
         PatientListFragment patientListFragment = (PatientListFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.content_main);
@@ -43,9 +44,8 @@ public class PatientListActivity extends AppCompatActivity implements Navigation
         }else{
             Log.e("Errors","patent null");
         }
-        mListPresenter = new ListPresenter(getApplicationContext());
-       // ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),new PatientListFragment(),
-        //R.id.content_main);
+      mListPresenter = new ListPresenter(getApplicationContext(),patientListFragment);
+
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,6 +63,7 @@ public class PatientListActivity extends AppCompatActivity implements Navigation
 
         switch (item.getItemId()){
             case R.id.nav_home :
+                startActivity(new Intent(this, HomeActivity.class));
                 break;
             case R.id.nav_cpn:
                 //nothing todo alreay in nav_cpn

@@ -1,0 +1,131 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.david.matibabu.home.HomeFragment">
+    <LinearLayout
+        android:paddingLeft="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:paddingBottom="16dp"
+        android:elevation="1dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aujourd'hui"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/slide_title"/>
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            android:text="DATE"/>
+    </LinearLayout>
+
+    <RelativeLayout
+       android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.CardView
+            android:id="@+id/card1"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="8dp">
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center|top"
+                android:src="@drawable/checklist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txt_cpn_today"
+                android:layout_gravity="bottom"
+                android:text="80 femmes vos passer pour la cpn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:padding="2dp"/>
+
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_margin="8dp"
+            android:layout_toRightOf="@+id/card1"
+            android:id="@+id/card2"
+            android:layout_width="120dp"
+            android:layout_height="120dp">
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center|top"
+                android:src="@drawable/calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txt_pass_cpn_today"
+                android:layout_gravity="bottom"
+                android:text="80 femmes sont entendues demain "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:padding="2dp"/>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_margin="8dp"
+            android:layout_below="@+id/card1"
+            android:id="@+id/card3"
+            android:layout_width="120dp"
+            android:layout_height="120dp">
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center|top"
+                android:src="@drawable/new_patient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txt_cpn_new"
+                android:layout_gravity="bottom"
+                android:text="80 femmes sont entendues demain "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:padding="2dp"/>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_margin="8dp"
+            android:layout_toRightOf="@id/card3"
+            android:layout_below="@id/card2"
+            android:id="@+id/card4"
+            android:layout_width="120dp"
+            android:layout_height="120dp">
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center|top"
+                android:src="@drawable/motherhood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txt_dueToday"
+                android:layout_gravity="bottom"
+                android:text="80 femmes sont entendues demain "
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>

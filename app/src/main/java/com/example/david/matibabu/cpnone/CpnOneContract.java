@@ -5,4 +5,5 @@ package com.example.david.matibabu.cpnone;
  */
 
 public interface CpnOneContract {
+
 }

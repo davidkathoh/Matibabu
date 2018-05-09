@@ -8,6 +8,7 @@ import java.util.List;
  */
 
 public class HopitalInfo {
+    private String hopitalUID;
     private String province;
     private String zoneDeSante;
     private String structure;
@@ -79,5 +80,13 @@ public class HopitalInfo {
 
     public void setArret(String arret) {
         this.arret = arret;
+    }
+
+    public String getHopitalUID() {
+        return hopitalUID;
+    }
+
+    public void setHopitalUID(String hopitalUID) {
+        this.hopitalUID = hopitalUID;
     }
 }

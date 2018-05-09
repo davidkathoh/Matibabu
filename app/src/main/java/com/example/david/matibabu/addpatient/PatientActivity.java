@@ -14,9 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.david.matibabu.R;
+import com.example.david.matibabu.home.HomeActivity;
 import com.example.david.matibabu.listpatient.PatientListActivity;
 import com.example.david.matibabu.utils.ActivityUtils;
-import com.example.david.matibabu.view.fragment.CpnFragment;
 
 public class PatientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -44,7 +44,7 @@ public class PatientActivity extends AppCompatActivity
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),patientInfoFragment,R.id.content_main);
         }
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // initializing the presenter
@@ -72,6 +72,7 @@ public void displaySelectedScreen(int itemId){
     Fragment fragment = null;
     switch (itemId){
         case R.id.nav_home:
+            startActivity(new Intent(this, HomeActivity.class));
             break;
         case R.id.nav_add_patient:
             //nothing todo
@@ -79,6 +80,7 @@ public void displaySelectedScreen(int itemId){
             break;
         case R.id.nav_cpn:
             startActivity(new Intent(this, PatientListActivity.class));
+
     }
     if (fragment != null){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fer_array">
+        <item>Fer ...</item>
+        <item>FER 1</item>
+        <item>FER 2</item>
+        <item>FER 3</item>
+        <item>FER 4</item>
+        <item>FER 5</item>
+    </string-array>
+    <string-array name="sp_array">
+        <item>Sp ...</item>
+        <item>SP 1</item>
+        <item>SP 2</item>
+        <item>SP 3</item>
+        <item>SP 4</item>
+        <item>SP 5</item>
+    </string-array>
+    <string-array name="vat_array">
+        <item>Vat ...</item>
+        <item>VAT 1</item>
+        <item>VAT 2</item>
+        <item>VAT 3</item>
+        <item>VAT 4</item>
+    </string-array>
+    <string-array name="risque_array">
+        <item>Risque...</item>
+        <item>REPERE</item>
+        <item>AUCUN RISQUE</item>
+        <item>DETECTE</item>
+    </string-array>
+
+
+
+
+</resources>

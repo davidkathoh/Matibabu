@@ -1,5 +1,6 @@
 package com.example.david.matibabu.addpatient;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -92,9 +93,9 @@ public class PatientInfoFragment extends Fragment implements PatientContract.Vie
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_patient_info, container, false);
-
-
-
+//        ActionBar actionBar = getActivity().getActionBar();
+//        actionBar.setTitle(R.string.tlb_new_patient);
+            getActivity().setTitle(R.string.tlb_new_patient);
         // autocomplete on marital status
         marital_status = v.findViewById(R.id.auto_compl_etat_civil);
         til_pat_etatcivil = v.findViewById(R.id.tip_pat_etatcivil);
@@ -158,16 +159,16 @@ public class PatientInfoFragment extends Fragment implements PatientContract.Vie
 
         int id = item.getItemId();
         if (id == R.id.menu_next){
+        if(validate()) {
+            mPresenter.createPatiente(edt_pat_name.getText().toString(),
+                    edt_pat_number.getText().toString(),
+                    mDate, marital_status.getText().toString(),
+                    edt_coj_name.getText().toString(), edt_coj_number.getText().toString(),
+                    edt_urg_name.getText().toString(), edt_urg_phone.getText().toString(),
+                    edt_pat_address.getText().toString(), getActivity().getApplicationContext());
 
-    mPresenter.createPatiente(edt_pat_name.getText().toString(),
-            edt_pat_number.getText().toString(),
-          mDate,marital_status.getText().toString(),
-            edt_coj_name.getText().toString(),edt_coj_number.getText().toString(),
-            edt_urg_name.getText().toString(),edt_urg_phone.getText().toString(),
-           edt_pat_address.getText().toString(),getActivity().getApplicationContext());
+        }
 
-
-            Snackbar.make(mLinearLayout,"Saved",Snackbar.LENGTH_LONG).show();
 
         }
         return super.onOptionsItemSelected(item);
@@ -176,15 +177,43 @@ public class PatientInfoFragment extends Fragment implements PatientContract.Vie
 
     @Override
     public void openAntecendent(long id) {
-        PatientAntecedantFragment antecedant = new PatientAntecedantFragment();
-        Bundle bundle = new Bundle();
-        bundle.putLong("ID",id);
-        antecedant.setArguments(bundle);
-           Log.e("Open","Interface called ");
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_main,antecedant,"Fragment")
-                .addToBackStack(null)
-                .commit();
+            String name = edt_pat_name.getText().toString();
+            PatientAntecedantFragment antecedant = new PatientAntecedantFragment();
+            Bundle bundle = new Bundle();
+            bundle.putLong("ID", id);
+            bundle.putString("name",name);
+            antecedant.setArguments(bundle);
+            Log.e("Open", "Interface called ");
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_main, antecedant, "Fragment")
+                    .addToBackStack(null)
+                    .commit();
+
+    }
+    public boolean validate(){
+        boolean valid = true;
+        String nom = edt_pat_name.getText().toString().trim();
+        String address = edt_pat_address.getText().toString();
+        String dob = edt_pat_date.getText().toString();
+        if (nom.isEmpty()){
+            edt_pat_name.setError("le nom de la patiente");
+            valid = false;
+        }else{
+            edt_pat_name.setError(null);
+        }
+        if (address.isEmpty()){
+            edt_pat_address.setError("addresse de la patiente");
+            valid = false;
+        }else {
+            edt_pat_address.setError(null);
+        }
+        if (dob.isEmpty()){
+            edt_pat_date.setError("date de naissance patiente");
+            valid = false;
+        }else {
+            edt_pat_date.setError(null);
+        }
+        return  valid;
     }
 
     @Override

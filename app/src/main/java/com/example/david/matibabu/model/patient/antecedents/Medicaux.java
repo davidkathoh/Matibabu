@@ -28,7 +28,7 @@ public class Medicaux {
     private boolean vvs;
     private boolean pep;
 
-    public Medicaux(long patientId, boolean tbc, boolean hta, boolean sca_ss, boolean dbt, boolean car, boolean mgf, boolean syphylis, boolean vih_sida, boolean vvs, boolean pep) {
+    public Medicaux(long patientId, boolean tbc, boolean hta, boolean sca_ss, boolean dbt, boolean car, boolean mgf, boolean raa, boolean syphylis, boolean vih_sida, boolean vvs, boolean pep) {
         this.patientId = patientId;
         this.tbc = tbc;
         this.hta = hta;

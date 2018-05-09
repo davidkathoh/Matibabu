@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
 
 
-    tools:context="com.example.david.matibabu.view.fragment.SignupFragment">
+    tools:context="com.example.david.matibabu.account.signup.SignupFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

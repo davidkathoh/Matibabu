@@ -82,6 +82,17 @@
     <!--toolbar title-->
     <string name="add_patient">Nouveau</string>
     <string name="antecedent_patient">Antecedent</string>
+    <string name="title_cpn_two">Deuxieme consultation</string>
+    <string name="title_cpn_three">Troisieme Consultation</string>
+    <string name="title_cpn_one">Premiere consultation</string>
+    <string name="title_cpn_four">Quatrieme Consultation</string>
+    <string name="tlb_new_patient">Ajouter une patiente</string>
+    <string name="tlb_antecedent">Antecedent de la patiente</string>
+    <string name="tlb_list_activity">Toutes les patientes</string>
+    <string name="arrete_minister">Arrete ministeriel</string>
+    <string name="province">Select province</string>
+    <string name="enregistrer">S\'enregistrer</string>
+    <string name="connecter">Se connecter</string>
 
 
 </resources>
