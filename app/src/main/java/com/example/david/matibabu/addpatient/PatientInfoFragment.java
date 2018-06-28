@@ -22,6 +22,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 
 import com.example.david.matibabu.R;
+import com.example.david.matibabu.utils.FirebaseAnalytic;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -96,6 +99,7 @@ public class PatientInfoFragment extends Fragment implements PatientContract.Vie
 //        ActionBar actionBar = getActivity().getActionBar();
 //        actionBar.setTitle(R.string.tlb_new_patient);
             getActivity().setTitle(R.string.tlb_new_patient);
+
         // autocomplete on marital status
         marital_status = v.findViewById(R.id.auto_compl_etat_civil);
         til_pat_etatcivil = v.findViewById(R.id.tip_pat_etatcivil);
@@ -126,7 +130,7 @@ public class PatientInfoFragment extends Fragment implements PatientContract.Vie
             }
         });
 
-
+        FirebaseAnalytic.matibabuAnalyse(getContext());
         return v;
     }
 

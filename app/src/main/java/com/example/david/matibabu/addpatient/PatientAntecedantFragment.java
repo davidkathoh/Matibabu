@@ -27,6 +27,10 @@ import com.example.david.matibabu.addpatient.dialogFragment.DfGyneco;
 import com.example.david.matibabu.addpatient.dialogFragment.DfMedical;
 import com.example.david.matibabu.addpatient.dialogFragment.DfObstericaux;
 import com.example.david.matibabu.patientdetail.PatientDetailActivity;
+import com.example.david.matibabu.utils.FirebaseAnalytic;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -49,6 +53,7 @@ public class PatientAntecedantFragment extends Fragment {
     static DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
     String date = null;
    static String PATIENTUID="PATIENTID";
+
 
 
     private TextView medical;
@@ -103,13 +108,19 @@ public class PatientAntecedantFragment extends Fragment {
 
     }
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_patient_info_1,container,false);
+
       mPresenter = new PatientAntPresenter(getContext());
     getActivity().setTitle(R.string.tlb_antecedent);
 //        PatientId = mPresenter.getPatientId();
+
+
+
         setHasOptionsMenu(true);
         Bundle bundle = getArguments();
         UID = bundle.getLong("ID");
@@ -124,20 +135,33 @@ public class PatientAntecedantFragment extends Fragment {
         rootLayout = v.findViewById(R.id.root_antecedent);
         edt_pat_regle_date = v.findViewById(R.id.pat_regle_date);
         medical.setOnClickListener(v12 -> {
-            dfMedical.setVisibility(View.VISIBLE);
-            dfObsterico.setVisibility(View.GONE);
-            dfGyneco.setVisibility(View.GONE);
+            if (dfMedical.getVisibility() == View.VISIBLE){
+                dfMedical.setVisibility(View.GONE);
+
+            }else {
+                dfMedical.setVisibility(View.VISIBLE);
+                dfObsterico.setVisibility(View.GONE);
+                dfGyneco.setVisibility(View.GONE);
+            }
+
         });
         gyneco.setOnClickListener(v1 -> {
-            dfMedical.setVisibility(View.GONE);
-            dfObsterico.setVisibility(View.GONE);
-            dfGyneco.setVisibility(View.VISIBLE);
+            if (dfGyneco.getVisibility() == View.VISIBLE){
+                dfGyneco.setVisibility(View.GONE);
+            }else {
+                dfMedical.setVisibility(View.GONE);
+                dfObsterico.setVisibility(View.GONE);
+                dfGyneco.setVisibility(View.VISIBLE);
+            }
+
         });
         obstericaux.setOnClickListener(v13 -> {
+            if (dfObsterico.getVisibility() == View.VISIBLE) {
+               dfObsterico.setVisibility(View.GONE);
+            }else {
             dfMedical.setVisibility(View.GONE);
             dfObsterico.setVisibility(View.VISIBLE);
-            dfGyneco.setVisibility(View.GONE);
-
+            dfGyneco.setVisibility(View.GONE);}
         });
         edt_pat_regle_date = v.findViewById(R.id.pat_regle_date);
         edt_pat_regle_date.setOnClickListener(v14 -> {
@@ -179,6 +203,9 @@ public class PatientAntecedantFragment extends Fragment {
         premature = v.findViewById(R.id.obs_premature);
         postmature = v.findViewById(R.id.obs_post_mature);
         mortne = v.findViewById(R.id.obs_mort_ne);
+
+        //firebase
+        FirebaseAnalytic.matibabuAnalyse(getContext());
 
 
         return v;
@@ -225,14 +252,16 @@ public class PatientAntecedantFragment extends Fragment {
                 mCar.isChecked(),mMgf.isChecked(), mRaa.isChecked(),mSyphilis.isChecked(),
                 mSida.isChecked(),mVvs.isChecked(),mPep.isChecked());
 
-
+        mPresenter.insertGyn(UID,mCesarieneChb.isChecked(),mCerclage.isChecked(),
+                mFibrone.isChecked(),mFracture.isChecked(),mGeu.isChecked()
+        ,mFistude.isChecked(),mCicatrice.isChecked(),mSterilite.isChecked());
         mPresenter.insertObs(UID,
                 to_int(parite),to_int(gestite),to_int(enfant),
                 to_int(avortement),to_int(dystocie),to_int(eutocie)
                 ,to_int(premature)
                 ,to_int(postmature),to_int(mortne),false);
 
-       // mPresenter.upDatePeriodDate((int)UID,mDate);
+        mPresenter.upDatePeriodDate((int)UID,mDate);
 
     }
 public int to_int(EditText editText){
@@ -243,12 +272,11 @@ public int to_int(EditText editText){
 }
 
 public void openActivity(){
-
+    int id = (int)UID;
         Intent i = new Intent(getActivity(), PatientDetailActivity.class);
-        i.putExtra("uid",UID);
+        i.putExtra("uid",id);
         i.putExtra("name",patientName);
         i.putExtra("date",date);
-    Log.e("date",date);
         startActivity(i);
         getActivity().finish();
 }

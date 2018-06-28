@@ -43,8 +43,9 @@ public class CpnTwoFragment extends Fragment {
 
     private Date mDate;
     CpnTwoPresenter mPresenter;
-    private long patientId;
+    private int patientId;
     private String patientName;
+    private String dateString;
 
 
     public CpnTwoFragment() {
@@ -69,8 +70,9 @@ public class CpnTwoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cpn_two,container,false);
         mPresenter = new CpnTwoPresenter(getContext());
         Intent intent =getActivity().getIntent();
-        patientId = intent.getLongExtra("uid",0);
+        patientId = intent.getIntExtra("uid",0);
         patientName = intent.getStringExtra("name");
+        dateString = intent.getStringExtra("date");
         vat = view.findViewById(R.id.sp_vat);
         sp = view.findViewById(R.id.sp_sp);
         fer = view.findViewById(R.id.sp_fer);
@@ -106,12 +108,19 @@ public class CpnTwoFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.menu_save){
-            save();
-            openDetail();
+        switch (id){
+            case  R.id.menu_save:
+                save();
+                openDetail();
+                return true;
+            case android.R.id.home:
+//                openDetail();
+                openDetail();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+
     }
 
     @Override
@@ -120,7 +129,7 @@ public class CpnTwoFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
     public void save(){
-        mPresenter.doCpn((int) patientId
+        mPresenter.doCpn( patientId
                 ,sp.getSelectedItem().toString(),
                 fer.getSelectedItem().toString(),
                 sp.getSelectedItem().toString(),
@@ -133,6 +142,8 @@ public class CpnTwoFragment extends Fragment {
         Intent i = new Intent(getActivity(), PatientDetailActivity.class);
         i.putExtra("uid",patientId);
         i.putExtra("name",patientName);
+        i.putExtra("date",dateString);
         startActivity(i);
+        getActivity().finish();
     }
 }

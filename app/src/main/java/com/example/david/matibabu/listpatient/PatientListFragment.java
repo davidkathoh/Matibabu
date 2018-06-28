@@ -23,6 +23,7 @@ import com.example.david.matibabu.R;
 import com.example.david.matibabu.model.patient.PersonalInfo;
 import com.example.david.matibabu.patientdetail.PatientDetailActivity;
 import com.example.david.matibabu.utils.DividerItemDecoration;
+import com.example.david.matibabu.utils.FirebaseAnalytic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,7 @@ public class PatientListFragment extends Fragment  implements PatientListContrac
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         mPresenter.getAllPatient();
         //mRecyclerView.setAdapter(mPatientAdapter);
-
+        FirebaseAnalytic.matibabuAnalyse(getContext());
          return v;
     }
 

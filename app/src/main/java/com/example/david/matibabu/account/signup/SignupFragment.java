@@ -20,11 +20,13 @@ import com.example.david.matibabu.presenter.SignUpPresenter;
 import com.example.david.matibabu.addpatient.PatientActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -47,8 +49,8 @@ public class SignupFragment extends Fragment  implements SignupContract.View {
 
 
     ProgressDialog mProgressDialog;
-    SignUpInterace presenter;
-    SignUpPresenter controller = new SignUpPresenter();
+    SignupContract.Presenter presenter;
+
 
 
     public SignupFragment() {
@@ -77,8 +79,8 @@ public class SignupFragment extends Fragment  implements SignupContract.View {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_signup, container, false);
-        mAuth = FirebaseAuth.getInstance();
 
+        mAuth = FirebaseAuth.getInstance();
       sp_province =  view.findViewById(R.id.sp_province);
       sp_zone = view.findViewById(R.id.sp_zone_sante);
 
@@ -111,12 +113,12 @@ public class SignupFragment extends Fragment  implements SignupContract.View {
         }else {
 ////
 
-            Task<AuthResult> resultTask = mAuth.signInAnonymously();
-            resultTask.addOnSuccessListener(authResult -> {
+            //Task<AuthResult> resultTask = mAuth.signInAnonymously();
+            //resultTask.addOnSuccessListener(authResult -> {
                 //update user info
-                mProgressDialog.hide();
-                startActivity(new Intent(getActivity(), HomeActivity.class));
-            });
+//              mProgressDialog.hide();
+               // startActivity(new Intent(getActivity(), HomeActivity.class));
+            //});
         }
 
     };
@@ -130,7 +132,7 @@ public class SignupFragment extends Fragment  implements SignupContract.View {
 
     @Override
     public void setPresenter(SignupContract.Presenter presenter) {
-
+        this.presenter = presenter;
     }
 
     @Override
@@ -148,45 +150,39 @@ public class SignupFragment extends Fragment  implements SignupContract.View {
 
     }
 
+    @Override
+    public void saveHospitalInfo() {
+        presenter.registerHospital(
+                sp_province.getSelectedItem().toString(),
+                sp_zone.getSelectedItem().toString(),
+                sp_type.getText().toString(),
+                edt_minArret.getText().toString(),
+                edt_hopitalName.getText().toString(),
+                edt_hopitalAddress.getText().toString(),
+                edt_hopitalResponsableName.getText().toString(),
+                edt_hopitalResponsableNumber.getText().toString()
+        );
+    }
+
     public void sinup(){
-        mProgressDialog = new ProgressDialog(getActivity());
-        mProgressDialog.setMessage("Enregistrement en cour...");
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.show();
+        if (validate()) {
+            mProgressDialog = new ProgressDialog(getActivity());
+            mProgressDialog.setMessage("Enregistrement en cour...");
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.show();
 
-        Task<AuthResult> resultTask = mAuth.signInAnonymously();
-        resultTask.addOnSuccessListener(authResult -> {
-            //update user info
-            mProgressDialog.hide();
-          startActivity(new Intent(getActivity(), HomeActivity.class));
-        });
+            Task<AuthResult> resultTask = mAuth.signInAnonymously();
+            resultTask.addOnSuccessListener(authResult -> {
+                saveHospitalInfo();
+                mProgressDialog.hide();
+                startActivity(new Intent(getActivity(), HomeActivity.class));
+            });
+        }else {
+
+        }
 
 
 
-
-
-//        String phone = edt_hopitalResponsableNumber.getText().toString();
-//        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-//                "+250789098126",        // Phone number to verify
-//                60,                 // Timeout duration
-//                TimeUnit.SECONDS,   // Unit of timeout
-//                getActivity(),               // Activity (for callback binding)
-//                mCallbacks);        // OnVerificationStateChangedCallbacks
-//
-//        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-//            @Override
-//            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-//                    mProgressDialog.hide();
-//                    Log.e("TAG",phoneAuthCredential+"");
-//            }
-//
-//            @Override
-//            public void onVerificationFailed(FirebaseException e) {
-//                Log.e("TAG",e.toString());
-//                mProgressDialog.hide();
-//
-//            }
-//        };
 
     }
 
@@ -199,30 +195,32 @@ public class SignupFragment extends Fragment  implements SignupContract.View {
             String numeroResponsable = edt_hopitalResponsableNumber.getText().toString();
             if (arrete.isEmpty()){
                 //set the error message
+                edt_minArret.setError("arrete ministeriel");
                 valid = false;
             }else {
                 // set error message to null
             }
         if (nomHopital.isEmpty()){
-            //set the error message
+           edt_hopitalName.setError("Nom de l'hopital");
             valid = false;
         }else {
             // set error message to null
         }
         if (addressHop.isEmpty()){
-            //set the error message
+            edt_hopitalAddress.setError("Addresse hopital");
             valid = false;
         }else {
             // set error message to null
         }
         if (nomResponsable.isEmpty()){
-            //set the error message
+           edt_hopitalResponsableName.setError("Nom du responsable");
             valid = false;
         }else {
             // set error message to null
         }
         if (numeroResponsable.isEmpty()){
             //set the error message
+            edt_hopitalResponsableNumber.setError("Numero du responsable");
             valid = false;
         }else {
             // set error message to null

@@ -16,6 +16,8 @@ import com.example.david.matibabu.R;
 import com.example.david.matibabu.model.patient.PersonalInfo;
 import com.example.david.matibabu.patientdetail.PatientDetailActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,13 +33,12 @@ class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder>
     List<PersonalInfo> patientList;
     List<PersonalInfo> patientFilterdList;
     Bundle mBundle;
-
-
+    static DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
 
     public PatientAdapter(List<PersonalInfo> list) {
 
     this.patientList = list;
-    this.patientFilterdList = patientList;
+    this.patientFilterdList = list;
     setList(patientFilterdList);
 
 
@@ -64,7 +65,7 @@ class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return patientList.size();
+        return patientFilterdList.size();
     }
     public void replaceData(List<PersonalInfo> personalInfos){
         setList(personalInfos);
@@ -136,10 +137,14 @@ class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder>
             String name = patientFilterdList.get(getAdapterPosition()).getPatientName();
             int uid = patientFilterdList.get(getAdapterPosition()).getId();
             Date date = patientFilterdList.get(getAdapterPosition()).getLastPeriodDate();
+            String dateString = null;
+            if (date != null){
+                dateString = df.format(date);
+            }
             Intent intent = new Intent(v.getContext(), PatientDetailActivity.class);
             intent.putExtra("name",name);
             intent.putExtra("uid",uid);
-            intent.putExtra("date",date);
+            intent.putExtra("date",dateString);
             v.getContext().startActivity(intent);
            Log.e("Clicked()","item "+getAdapterPosition());
         }

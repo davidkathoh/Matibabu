@@ -12,97 +12,89 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
 
+        <Spinner
+            android:id="@+id/sp_province"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:prompt="@string/hint_nom_hopital" />
 
-    <Spinner
-        android:id="@+id/sp_province"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:prompt="@string/hint_nom_hopital"
-        android:layout_marginBottom="8dp"
-        style="@style/Widget.AppCompat.Spinner.Underlined"/>
+        <Spinner
+            android:id="@+id/sp_zone_sante"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:entries="@array/nk_list_zone_sante" />
 
-    <Spinner
-        android:id="@+id/sp_zone_sante"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:entries="@array/nk_list_zone_sante"
-        style="@style/Widget.AppCompat.Spinner.Underlined"/>
+        <EditText
+            android:id="@+id/sp_structure"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:hint="Aire de sante" />
 
-    <EditText
-        android:id="@+id/sp_structure"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:hint="Aire de sante"
-        android:layout_marginBottom="8dp"
-        />
+        <EditText
+            android:id="@+id/edt_hopital_arrete"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:hint="@string/arrete_minister" />
 
-    <EditText
-        android:layout_marginBottom="8dp"
-        android:id="@+id/edt_hopital_arrete"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:hint="@string/arrete_minister"
-        />
+        <EditText
+            android:id="@+id/edt_hopital_name"
+            style="@style/TextColor"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/hint_nom_hopital"
+            android:inputType="textPersonName" />
 
-    <EditText
-        android:layout_marginBottom="8dp"
-        android:id="@+id/edt_hopital_name"
-        style="@style/TextColor"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="@string/hint_nom_hopital"
-        android:inputType="textPersonName"
-       />
+        <EditText
+            android:id="@+id/edt_hopital_address"
+            style="@style/TextColor"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/hint_address_hopital"
+            android:inputType="textPersonName" />
 
-    <EditText
-        android:layout_marginBottom="8dp"
-        android:id="@+id/edt_hopital_address"
-        style="@style/TextColor"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="@string/hint_address_hopital"
-        android:inputType="textPersonName"
-       />
-
-    <EditText
-        android:layout_marginBottom="8dp"
-        android:id="@+id/edt_responsable_name"
-        style="@style/TextColor"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="@string/hint_nom_responsable"
-        android:inputType="textPersonName"
-        />
+        <EditText
+            android:id="@+id/edt_responsable_name"
+            style="@style/TextColor"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/hint_nom_responsable"
+            android:inputType="textPersonName" />
 
 
-    <EditText
-        android:id="@+id/edt_responsable_num"
-        style="@style/TextColor"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="@string/hint_num_responsable"
-        android:inputType="textPersonName"
-        android:layout_marginBottom="8dp"
-        />
+        <EditText
+            android:id="@+id/edt_responsable_num"
+            style="@style/TextColor"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/hint_num_responsable"
+            android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
 
-        android:background="@drawable/round_background"
-        android:text="@string/btn_save"
-        android:textColor="#FFFF"
-         />
+            android:background="@drawable/round_background"
+            android:text="@string/btn_save"
+            android:textColor="#FFFF" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.david.matibabu.R;
+import com.example.david.matibabu.utils.FirebaseAnalytic;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -67,6 +68,7 @@ public class HomeFragment extends Fragment implements HomeContract.View{
 
         date.setText(txtDate);
         mPresenter.fetch();
+        FirebaseAnalytic.matibabuAnalyse(getContext());
         return view;
     }
 

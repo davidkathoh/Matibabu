@@ -6,16 +6,22 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.david.matibabu.R;
 import com.example.david.matibabu.cpnfour.CpnFourActivity;
 import com.example.david.matibabu.cpnone.CpnOneActivity;
 import com.example.david.matibabu.cpnthree.CpnThreeActivity;
 import com.example.david.matibabu.cpntwo.CpnTwoActivity;
+import com.example.david.matibabu.listpatient.PatientListActivity;
+import com.example.david.matibabu.utils.FirebaseAnalytic;
 
 import org.joda.time.DateTime;
 import org.joda.time.Weeks;
@@ -23,7 +29,6 @@ import org.joda.time.Weeks;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,7 +43,7 @@ public class CpnDetailFragment extends Fragment {
     private TextView due_date;
     static DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
     private String name;
-    private long UID;
+    private int UID;
     private Date mDate;
     private Calendar mCalendar = Calendar.getInstance();
 
@@ -52,6 +57,7 @@ public class CpnDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
     }
 
@@ -71,7 +77,7 @@ public class CpnDetailFragment extends Fragment {
             Intent i = getActivity().getIntent();
 
             name = i.getStringExtra("name");
-            UID = i.getLongExtra("uid", 0);
+            UID = i.getIntExtra("uid",0);
             String date = i.getStringExtra("date");
             patient_name.setText(name);
 
@@ -87,7 +93,7 @@ public class CpnDetailFragment extends Fragment {
                 mCalendar.add(Calendar.MONTH, 9);
                 mCalendar.add(Calendar.DAY_OF_WEEK, 7);
                 DateTime dateTime1 = new DateTime(mDate);
-                DateTime dateTime2 = new DateTime(mCalendar.getTime());
+                DateTime dateTime2 = new DateTime(Calendar.getInstance().getTime());
 
                 int weeks = Weeks.weeksBetween(dateTime1, dateTime2).getWeeks();
                 String age ="Age : "+weeks+" senaines";
@@ -104,13 +110,15 @@ public class CpnDetailFragment extends Fragment {
             Intent intent = new Intent(CpnDetailFragment.this.getActivity(), CpnOneActivity.class);
             intent.putExtra("uid",UID);
             intent.putExtra("name",name);
-            CpnDetailFragment.this.startActivity(intent);
+            intent.putExtra("date",date);
+            startActivity(intent);
         });
         cpn2.setOnClickListener(v ->{
             //todo button click
             Intent intent = new Intent(getActivity(), CpnTwoActivity.class);
             intent.putExtra("uid",UID);
             intent.putExtra("name",name);
+            intent.putExtra("date",date);
             startActivity(intent);
         });
         cpn3.setOnClickListener(v ->{
@@ -118,29 +126,44 @@ public class CpnDetailFragment extends Fragment {
             Intent intent = new Intent(getActivity(), CpnThreeActivity.class);
             intent.putExtra("uid",UID);
             intent.putExtra("name",name);
+            intent.putExtra("date",date);
             startActivity(intent);
         });
         cpn4.setOnClickListener(v ->{
             //todo button click
-//            Intent intent = new Intent(getActivity(), CpnFourActivity.class);
-//            intent.putExtra("uid",UID);
-//            intent.putExtra("name",name);
-//            startActivity(intent);
+            Intent intent = new Intent(getActivity(), CpnFourActivity.class);
+            intent.putExtra("uid",UID);
+            intent.putExtra("name",name);
+            intent.putExtra("date",date);
+            startActivity(intent);
         });
+        FirebaseAnalytic.matibabuAnalyse(getContext());
 
         return view;
 
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id ==R.id.action_edit){
+            Toast.makeText(getContext(),"edit clicked",Toast.LENGTH_LONG).show();
 
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putString("name",name);
-//        outState.putLong("uid",UID);
-//
-//    }
+
+        }
+        if (id == R.id.home){
+            startActivity(new Intent(getActivity(), PatientListActivity.class));
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.detail_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     public void setdates(Date date){
         if (date!= null) {

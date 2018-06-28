@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.RelativeLayout;
 
 
@@ -29,5 +30,21 @@ public class PatientDetailActivity extends AppCompatActivity {
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), cpnDetailFragment,R.id.container);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.e(getLocalClassName(),"on backPressed");
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e(getLocalClassName(),"on stop");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(getLocalClassName(),"on Resume");
+    }
 }

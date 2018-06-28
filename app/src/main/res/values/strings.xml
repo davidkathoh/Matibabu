@@ -93,6 +93,10 @@
     <string name="province">Select province</string>
     <string name="enregistrer">S\'enregistrer</string>
     <string name="connecter">Se connecter</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="refresh">refresh</string>
+    <string name="rechercher">nom ,  telephone, numero</string>
 
 
 </resources>

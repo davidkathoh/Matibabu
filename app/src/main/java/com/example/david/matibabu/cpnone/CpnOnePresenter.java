@@ -2,11 +2,13 @@ package com.example.david.matibabu.cpnone;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.david.matibabu.model.localDB.AppDatabase;
 import com.example.david.matibabu.model.localDB.PatientDao;
 import com.example.david.matibabu.model.patient.Cpn;
 import com.example.david.matibabu.model.patient.PersonalInfo;
+import com.example.david.matibabu.model.remote.firebase.RemoteData;
 
 import java.util.Date;
 
@@ -29,11 +31,15 @@ public class CpnOnePresenter {
 
     private CompositeDisposable mCompositeDisposable;
     private  final int CPN_NUMBER = 1;
+    private RemoteData mRemoteData;
+    private Context mContext;
 
 
     public CpnOnePresenter(Context context) {
         db = AppDatabase.getAppDatabase(context);
         mDao = db.patientDao();
+        mContext = context;
+        mRemoteData = new RemoteData();
         mCompositeDisposable = new CompositeDisposable();
 
     }
@@ -57,13 +63,17 @@ public class CpnOnePresenter {
     }
 
     public void insert(PersonalInfo personalInfo, Cpn cpn){
+        mRemoteData.syncCpn(cpn);
         Disposable disposable = Completable.create( e -> {
 
                 mDao.makeCpn(cpn);})
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(()-> Log.e("SAVED","cpn saved saved"),
-                        e -> Log.e("NotSaved",e.toString()));
+                .subscribe(()->{ Log.e("SAVED","cpn saved saved");
+                        },
+                        (e) -> {
+            Log.e("SAVE",e.getMessage().toString());
+            Toast.makeText(mContext,"echec lors de l'enregistrement",Toast.LENGTH_LONG).show();});
         mCompositeDisposable.add(disposable);
     }
 }

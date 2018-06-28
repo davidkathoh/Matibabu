@@ -58,5 +58,9 @@ public interface PatientDao {
    @Query("UPDATE Patient set lastPeriodDate = :date where id = :uid")
    void  addLastPeriodeDate(Date date,int uid);
 
+    @Query("SELECT * FROM CPN where  cpnDate between date(:startDate) and date(:endDate) ")
+    List<Cpn> cpnStatistic(String startDate,String endDate);
+
+
 
 }

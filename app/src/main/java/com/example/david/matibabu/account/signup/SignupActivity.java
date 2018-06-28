@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.example.david.matibabu.R;
 import com.example.david.matibabu.model.preferences.PreferManager;
 import com.example.david.matibabu.utils.ActivityUtils;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
     SignupPresenter mSignupPresenter;
@@ -15,8 +16,8 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.signup_activity);
+
         SignupFragment signupFragment = (SignupFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.frag_authentificarion);
         if (signupFragment == null) {

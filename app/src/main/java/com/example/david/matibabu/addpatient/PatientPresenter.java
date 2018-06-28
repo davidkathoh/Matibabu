@@ -9,6 +9,7 @@ import com.example.david.matibabu.model.patient.PersonalInfo;
 import com.example.david.matibabu.model.patient.antecedents.GynecoChirurgi;
 import com.example.david.matibabu.model.patient.antecedents.Medicaux;
 import com.example.david.matibabu.model.patient.antecedents.Obstetricaux;
+import com.example.david.matibabu.model.remote.firebase.RemoteData;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -33,8 +34,7 @@ import static com.bumptech.glide.util.Preconditions.checkNotNull;
  */
 
 public class PatientPresenter implements PatientContract.Presenter{
-    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
-    String userId = mDatabase.push().getKey();
+
     private String EXTRAT_PATIENT_ID = "PATIENT_UID";
     private int patientId;
      long uid;
@@ -43,7 +43,7 @@ public class PatientPresenter implements PatientContract.Presenter{
 
     Context mContext;
   static CompositeDisposable mCompositeDisposable ;
-
+  private RemoteData mRemoteData;
 
     List<PersonalInfo> persone;
 
@@ -59,6 +59,7 @@ public class PatientPresenter implements PatientContract.Presenter{
         mContract = checkNotNull(contract);
         mContext = context;
         mCompositeDisposable = new CompositeDisposable();
+        mRemoteData = new RemoteData();
         mContract.setPresenter(this );
     }
 
@@ -67,7 +68,7 @@ public class PatientPresenter implements PatientContract.Presenter{
                                String cojName, String cojPhone, String urgName,
                                String urgPhone, String address, Context context) {
         final AppDatabase db = AppDatabase.getAppDatabase(context);
-                //AppDatabase.getAppDatabase();
+
 
         final PersonalInfo patient = new PersonalInfo();
         patient.setPatientName(name);
@@ -80,16 +81,22 @@ public class PatientPresenter implements PatientContract.Presenter{
         patient.setRescueName(urgName);
         patient.setRescuePhone(urgPhone);
 
-        mDatabase.child(userId).setValue(patient);
+       // mRemoteData.syncPatient(patient);
         Observable.fromCallable(() -> db.patientDao().insertPatient(patient))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(returnedId ->{
+                    saveToFirebase(patient,returnedId);
                     mContract.openAntecendent(returnedId);
-
                 },throwable -> Log.e("not saved",throwable.toString()));
 
  return uid;
+    }
+
+    public void  saveToFirebase(PersonalInfo p, long uid){
+        int id = (int)uid;
+        p.setId(id);
+        mRemoteData.syncPatient(p);
     }
 
     public long getUid() {

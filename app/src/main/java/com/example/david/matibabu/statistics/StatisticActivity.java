@@ -1,7 +1,6 @@
-package com.example.david.matibabu.home;
+package com.example.david.matibabu.statistics;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,37 +15,38 @@ import android.view.MenuItem;
 import com.example.david.matibabu.R;
 import com.example.david.matibabu.addpatient.PatientActivity;
 import com.example.david.matibabu.addpatient.PatientInfoFragment;
+import com.example.david.matibabu.addpatient.PatientPresenter;
+import com.example.david.matibabu.home.HomeActivity;
 import com.example.david.matibabu.listpatient.PatientListActivity;
-import com.example.david.matibabu.statistics.StatisticActivity;
 import com.example.david.matibabu.utils.ActivityUtils;
-import com.google.firebase.database.FirebaseDatabase;
 
-public class HomeActivity extends AppCompatActivity
-                        implements NavigationView.OnNavigationItemSelectedListener{
-
-    HomePresenter mHomePresenter;
-    private static FirebaseDatabase firebaseDatabase;
+public class StatisticActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
+    StatisticPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_statistic);
 
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,
-                toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
+       // getActionBar().setTitle("Statistiques");
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
-        HomeFragment homeFragment =   (HomeFragment)getSupportFragmentManager()
-                .findFragmentById(R.id.content_main);
-        if (homeFragment == null){
-        homeFragment =  HomeFragment.newInstance();
-        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),homeFragment,
-                R.id.content_main);}
-        mHomePresenter = new HomePresenter(homeFragment,getApplicationContext());
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        StatisticFragment statisticFragment =(StatisticFragment)
+                getSupportFragmentManager().findFragmentById(R.id.content_main);
+
+        if (statisticFragment == null){
+            statisticFragment = StatisticFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),statisticFragment
+                                        ,R.id.content_main);
+        }
+        mPresenter = new StatisticPresenter(getApplicationContext(),statisticFragment);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -62,8 +62,9 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item) {
         displaySelectedScreen(item.getItemId());
         return true;
     }
@@ -71,17 +72,17 @@ public class HomeActivity extends AppCompatActivity
         Fragment fragment = null;
         switch (itemId){
             case R.id.nav_home:
+                startActivity(new Intent(this, HomeActivity.class));
                 break;
             case R.id.nav_add_patient:
-
                 startActivity(new Intent(this, PatientActivity.class));
-                //fragment = new PatientInfoFragment();
                 break;
             case R.id.nav_cpn:
                 startActivity(new Intent(this, PatientListActivity.class));
                 break;
             case R.id.nav_statistic:
-                startActivity(new Intent(this, StatisticActivity.class));
+
+
         }
         if (fragment != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -89,7 +90,8 @@ public class HomeActivity extends AppCompatActivity
             ft.commit();
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
+
 }

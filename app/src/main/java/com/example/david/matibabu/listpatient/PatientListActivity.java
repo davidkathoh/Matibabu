@@ -17,6 +17,7 @@ import com.example.david.matibabu.R;
 import com.example.david.matibabu.addpatient.PatientActivity;
 import com.example.david.matibabu.addpatient.PatientInfoFragment;
 import com.example.david.matibabu.home.HomeActivity;
+import com.example.david.matibabu.statistics.StatisticActivity;
 import com.example.david.matibabu.utils.ActivityUtils;
 
 /**
@@ -72,6 +73,7 @@ public class PatientListActivity extends AppCompatActivity implements Navigation
                startActivity(new Intent(this, PatientActivity.class));
                 break;
             case R.id.nav_statistic:
+                startActivity(new Intent(this, StatisticActivity.class));
                 break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

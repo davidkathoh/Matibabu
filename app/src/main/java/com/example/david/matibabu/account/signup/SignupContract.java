@@ -14,12 +14,13 @@ public interface SignupContract {
         void showLoadingIndicator();
         void showErrorMessage();
         void openActivity();
+        void saveHospitalInfo();
 
     }
     interface Presenter extends BasePresenter{
         void registerHospital(String province,
                               String zoneSante,
-                              String StructureType,
+                              String aireDeSante,
                               String arreteMinisteriel,
                               String nomHopital,
                               String addressHopital,

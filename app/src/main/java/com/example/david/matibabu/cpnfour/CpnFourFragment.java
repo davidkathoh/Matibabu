@@ -44,8 +44,9 @@ public class CpnFourFragment extends Fragment {
     private CheckBox vgb;
 
     private Date mDate;
+    private String dateString;
     CpnFourPresenter mPresenter;
-    private long patientId;
+    private int patientId;
     private String patientName;
 
 
@@ -65,11 +66,12 @@ public class CpnFourFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.activity_cpn_four, container,false);
+        View view = inflater.inflate(R.layout.fragment_cpn_four, container,false);
         mPresenter = new CpnFourPresenter(getContext());
         Intent intent =getActivity().getIntent();
-        patientId = intent.getLongExtra("uid",0);
+        patientId = intent.getIntExtra("uid",0);
         patientName = intent.getStringExtra("name");
+        dateString = intent.getStringExtra("date");
         vat = view.findViewById(R.id.sp_vat);
         sp = view.findViewById(R.id.sp_sp);
         fer = view.findViewById(R.id.sp_fer);
@@ -79,12 +81,12 @@ public class CpnFourFragment extends Fragment {
         datePicker = view.findViewById(R.id.rdv_date);
         patientOccupation = view.findViewById(R.id.ed_patient_occup);
 
-//        datePicker.setOnClickListener(v ->{
-//            FragmentManager fragmentManager = getFragmentManager();
-//            DatePickerFragment dialog = new DatePickerFragment();
-//            dialog.setTargetFragment(CpnFourFragment.this,REQUEST_DATE);
-//            dialog.show(fragmentManager,DATE_FRAGMENT);
-//        });
+        datePicker.setOnClickListener(v ->{
+            FragmentManager fragmentManager = getFragmentManager();
+            DatePickerFragment dialog = new DatePickerFragment();
+            dialog.setTargetFragment(CpnFourFragment.this,REQUEST_DATE);
+            dialog.show(fragmentManager,DATE_FRAGMENT);
+        });
         return view;
     }
 
@@ -119,7 +121,7 @@ public class CpnFourFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
     public void save(){
-        mPresenter.doCpn((int) patientId
+        mPresenter.doCpn( patientId
                 ,sp.getSelectedItem().toString(),
                 fer.getSelectedItem().toString(),
                 sp.getSelectedItem().toString(),
@@ -132,7 +134,9 @@ public class CpnFourFragment extends Fragment {
         Intent i = new Intent(getActivity(), PatientDetailActivity.class);
         i.putExtra("uid",patientId);
         i.putExtra("name",patientName);
+        i.putExtra("date",dateString);
         startActivity(i);
+        getActivity().finish();
     }
 
 

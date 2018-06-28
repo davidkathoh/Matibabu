@@ -6,11 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_margin="8dp"
+
     >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_horizontal"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -31,6 +34,7 @@
             android:layout_width="100px"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:inputType="number"
             android:hint="0"/>
         <TextView
             android:layout_width="wrap_content"
@@ -41,11 +45,13 @@
             android:layout_width="100px"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:inputType="number"
             android:hint="0"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -56,6 +62,7 @@
             android:layout_width="100px"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:inputType="number"
             android:hint="0"/>
         <TextView
 
@@ -67,6 +74,7 @@
             android:layout_width="100px"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:inputType="number"
             android:hint="0"/>
         <TextView
             android:layout_width="wrap_content"
@@ -77,11 +85,13 @@
             android:layout_width="100px"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:inputType="number"
             android:hint="0"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -92,6 +102,7 @@
             android:layout_width="100px"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:inputType="number"
             android:hint="0"/>
         <TextView
             android:layout_width="wrap_content"
@@ -102,6 +113,7 @@
             android:layout_width="100px"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:inputType="number"
             android:hint="0"/>
         <TextView
             android:layout_width="wrap_content"
@@ -112,68 +124,9 @@
             android:layout_width="100px"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:inputType="number"
             android:hint="0"/>
     </LinearLayout>
 
-
-    <!--<CheckBox-->
-        <!--android:id="@+id/chb_parite"-->
-        <!--android:layout_column="1"-->
-        <!--android:layout_row="1"-->
-        <!--android:text="@string/obs_text_parite" />-->
-
-    <!--<CheckBox-->
-        <!--android:id="@+id/chb_gestile"-->
-        <!--android:layout_column="2"-->
-        <!--android:layout_row="1"-->
-        <!--android:text="@string/obs_text_gestite" />-->
-
-    <!--<CheckBox-->
-        <!--android:id="@+id/chb_enfant"-->
-        <!--android:layout_column="1"-->
-        <!--android:layout_row="2"-->
-        <!--android:text="@string/obs_text_Enfant" />-->
-
-    <!--<CheckBox-->
-        <!--android:id="@+id/chb_avortement"-->
-        <!--android:layout_column="2"-->
-        <!--android:layout_row="2"-->
-        <!--android:text="@string/obs_text_avortement" />-->
-
-    <!--<CheckBox-->
-        <!--android:id="@+id/chb_dystocie"-->
-        <!--android:layout_column="1"-->
-        <!--android:layout_row="3"-->
-        <!--android:text="@string/obs_text_Dystocie" />-->
-
-    <!--<CheckBox-->
-        <!--android:id="@+id/chb_eutocie"-->
-        <!--android:layout_column="2"-->
-        <!--android:layout_row="3"-->
-        <!--android:text="@string/obs_text_Eutocie" />-->
-
-    <!--<CheckBox-->
-        <!--android:id="@+id/chb_premature"-->
-        <!--android:layout_column="1"-->
-        <!--android:layout_row="4"-->
-        <!--android:text="@string/obs_text_premature" />-->
-
-    <!--<CheckBox-->
-        <!--android:id="@+id/chb_postmature"-->
-        <!--android:layout_column="2"-->
-        <!--android:layout_row="4"-->
-        <!--android:text="@string/obs_text_post_mature" />-->
-
-    <!--<CheckBox-->
-        <!--android:id="@+id/chb_mort"-->
-        <!--android:layout_column="1"-->
-        <!--android:layout_row="5"-->
-        <!--android:text="@string/obs_text_mort_ne" />-->
-
-    <!--<CheckBox-->
-        <!--android:id="@+id/chb_complication"-->
-        <!--android:layout_column="2"-->
-        <!--android:layout_row="5"-->
-        <!--android:text="@string/obs_text_complication" />-->
 
 </LinearLayout>

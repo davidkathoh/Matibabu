@@ -11,12 +11,12 @@ public class HopitalInfo {
     private String hopitalUID;
     private String province;
     private String zoneDeSante;
-    private String structure;
+    private String aireDesante;
     private String arret;
     private String nomDeHopital;
     private String address;
     private String nomResponsable;
-    private int phoneResponsable;
+    private String phoneResponsable;
 
     public String getProvince() {
         return province;
@@ -34,12 +34,12 @@ public class HopitalInfo {
         this.zoneDeSante = zoneDeSante;
     }
 
-    public String getStructure() {
-        return structure;
+    public String getAireDesante() {
+        return aireDesante;
     }
 
-    public void setStructure(String structure) {
-        this.structure = structure;
+    public void setAireDesante(String aireDesante) {
+        this.aireDesante = aireDesante;
     }
 
     public String getNomDeHopital() {
@@ -66,11 +66,11 @@ public class HopitalInfo {
         this.nomResponsable = nomResponsable;
     }
 
-    public int getPhoneResponsable() {
+    public String getPhoneResponsable() {
         return phoneResponsable;
     }
 
-    public void setPhoneResponsable(int phoneResponsable) {
+    public void setPhoneResponsable(String phoneResponsable) {
         this.phoneResponsable = phoneResponsable;
     }
 

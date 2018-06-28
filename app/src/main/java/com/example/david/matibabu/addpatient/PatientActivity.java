@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.example.david.matibabu.R;
 import com.example.david.matibabu.home.HomeActivity;
 import com.example.david.matibabu.listpatient.PatientListActivity;
+import com.example.david.matibabu.statistics.StatisticActivity;
 import com.example.david.matibabu.utils.ActivityUtils;
 
 public class PatientActivity extends AppCompatActivity
@@ -80,6 +81,9 @@ public void displaySelectedScreen(int itemId){
             break;
         case R.id.nav_cpn:
             startActivity(new Intent(this, PatientListActivity.class));
+            break;
+        case R.id.nav_statistic:
+            startActivity(new Intent(this, StatisticActivity.class));
 
     }
     if (fragment != null){

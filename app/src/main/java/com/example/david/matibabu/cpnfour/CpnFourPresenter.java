@@ -7,6 +7,7 @@ import com.example.david.matibabu.model.localDB.AppDatabase;
 import com.example.david.matibabu.model.localDB.PatientDao;
 import com.example.david.matibabu.model.patient.Cpn;
 import com.example.david.matibabu.model.patient.PersonalInfo;
+import com.example.david.matibabu.model.remote.firebase.RemoteData;
 
 import java.util.Date;
 
@@ -29,10 +30,12 @@ public class CpnFourPresenter {
 
     private CompositeDisposable mCompositeDisposable;
     private  final int CPN_NUMBER = 4;
+    private RemoteData mRemoteData;
 
     public CpnFourPresenter(Context context) {
         db = AppDatabase.getAppDatabase(context);
         mDao = db.patientDao();
+        mRemoteData = new RemoteData();
         mCompositeDisposable = new CompositeDisposable();
 
     }
@@ -61,7 +64,9 @@ public class CpnFourPresenter {
             mDao.makeCpn(cpn);})
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(()-> Log.e("SAVED","cpn saved saved"),
+                .subscribe(()-> {
+            mRemoteData.syncCpn(cpn);
+            Log.e("SAVED","cpn saved saved");},
                         e -> Log.e("NotSaved",e.toString()));
         mCompositeDisposable.add(disposable);
     }

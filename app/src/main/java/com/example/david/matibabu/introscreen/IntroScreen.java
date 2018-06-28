@@ -13,6 +13,7 @@ import com.example.david.matibabu.home.HomeActivity;
 import com.example.david.matibabu.model.preferences.PreferManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class IntroScreen extends AppCompatActivity {
     private PreferManager mManager;
@@ -26,6 +27,7 @@ public class IntroScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro_screen);
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         mAuth = FirebaseAuth.getInstance();
         mManager = new PreferManager(this);
 
@@ -49,6 +51,7 @@ public class IntroScreen extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
       mAuth.addAuthStateListener(mAuthStateListener);
 
 

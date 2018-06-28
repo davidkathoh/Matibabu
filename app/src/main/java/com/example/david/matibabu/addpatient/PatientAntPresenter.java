@@ -10,6 +10,7 @@ import com.example.david.matibabu.model.patient.PersonalInfo;
 import com.example.david.matibabu.model.patient.antecedents.GynecoChirurgi;
 import com.example.david.matibabu.model.patient.antecedents.Medicaux;
 import com.example.david.matibabu.model.patient.antecedents.Obstetricaux;
+import com.example.david.matibabu.model.remote.firebase.RemoteData;
 
 import java.util.Date;
 
@@ -38,12 +39,14 @@ public class PatientAntPresenter {
     private Date mDate;
     private int patientID;
     static CompositeDisposable mCompositeDisposable ;
+    private RemoteData mRemoteData;
 
     public PatientAntPresenter(Context context) {
         mContext = context;
         mCompositeDisposable = new CompositeDisposable();
         db = AppDatabase.getAppDatabase(context);
         mDao = db.patientDao();
+        mRemoteData = new RemoteData();
        // mView.setPresenter(this);
     }
 
@@ -105,6 +108,7 @@ public class PatientAntPresenter {
             addAntMedi(mMedicaux,context);
             addAntObs(mObstetricaux,context);
             mDao.addLastPeriodeDate(mDate,patientID);
+            mRemoteData.syncAnt(String.valueOf(patientID),mMedicaux,mObstetricaux,mChirurgi);
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(()-> Log.e("SAVED","Antecedent saved"),
